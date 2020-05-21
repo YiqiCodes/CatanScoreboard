@@ -5,9 +5,9 @@ export const HeaderContainerDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 40%;
+  height: 30%;
   width: 100%;
-  background: slategray;
+  background: #2d3842;
   color: white;
 `;
 
@@ -19,6 +19,11 @@ export const TitleDiv = styled.div`
   padding: 5px;
   width: 100%;
   margin: 5px;
+`;
+
+export const TextInformationDiv = styled.div`
+  font-size: small;
+  padding: 1px;
 `;
 
 export const ScoreContainerDiv = styled.div`

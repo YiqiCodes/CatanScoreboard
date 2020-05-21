@@ -8,6 +8,7 @@ import {
   ScoreNameDiv,
   TotalWinsDiv,
   SeasonWinsDiv,
+  TextInformationDiv,
 } from "./HeaderBar.styles.js";
 
 const HeaderBar = () => {
@@ -16,32 +17,32 @@ const HeaderBar = () => {
       <TitleDiv>Catan</TitleDiv>
       <ScoreContainerDiv>
         <ScoreNameDiv>
-          <p>Players</p>
-          <p>Yiqi</p>
-          <p>Mickias</p>
-          <p>Rob</p>
-          <p>Dylan</p>
+          <TextInformationDiv>Players</TextInformationDiv>
+          <TextInformationDiv>Yiqi</TextInformationDiv>
+          <TextInformationDiv>Mickias</TextInformationDiv>
+          <TextInformationDiv>Rob</TextInformationDiv>
+          <TextInformationDiv>Dylan</TextInformationDiv>
         </ScoreNameDiv>
         <TotalWinsDiv>
-          <p>Total Wins</p>
-          <p>15</p>
-          <p>12</p>
-          <p>11</p>
-          <p>7</p>
+          <TextInformationDiv>Total Wins</TextInformationDiv>
+          <TextInformationDiv>15</TextInformationDiv>
+          <TextInformationDiv>12</TextInformationDiv>
+          <TextInformationDiv>11</TextInformationDiv>
+          <TextInformationDiv>7</TextInformationDiv>
         </TotalWinsDiv>
         <SeasonWinsDiv>
-          <p>Season Two</p>
-          <p>1</p>
-          <p>1</p>
-          <p>0</p>
-          <p>1</p>
+          <TextInformationDiv>Season Two</TextInformationDiv>
+          <TextInformationDiv>1</TextInformationDiv>
+          <TextInformationDiv>1</TextInformationDiv>
+          <TextInformationDiv>0</TextInformationDiv>
+          <TextInformationDiv>1</TextInformationDiv>
         </SeasonWinsDiv>
         <SeasonWinsDiv>
-          <p>Season One</p>
-          <p>14</p>
-          <p>11</p>
-          <p>11</p>
-          <p>6</p>
+          <TextInformationDiv>Season One</TextInformationDiv>
+          <TextInformationDiv>14</TextInformationDiv>
+          <TextInformationDiv>11</TextInformationDiv>
+          <TextInformationDiv>11</TextInformationDiv>
+          <TextInformationDiv>6</TextInformationDiv>
         </SeasonWinsDiv>
       </ScoreContainerDiv>
     </HeaderContainerDiv>

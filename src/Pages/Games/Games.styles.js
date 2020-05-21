@@ -7,7 +7,7 @@ export const OutterGameContainerDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: slategray;
+  background: #2d3842;
   color: white;
 `;
 
@@ -15,11 +15,11 @@ export const ScrollableContainerDiv = styled.div`
   display: flex;
   justify-content: center;
   position: absolute;
-  top: 43%;
-  height: 50%;
+  top: 30%;
+  height: 62.5%;
   width: 100%;
   overflow-y: scroll;
-  background: #2d3842;
+  background: slategray;
 `;
 export const GoBackButton = styled.div`
   display: flex;
@@ -28,7 +28,7 @@ export const GoBackButton = styled.div`
   background: #8f836f;
   color: white;
   bottom: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 8px;
   width: 10rem;
   border-radius: 5px;
   height: 2rem;
