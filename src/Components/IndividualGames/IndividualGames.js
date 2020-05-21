@@ -68,15 +68,18 @@ const IndividualGames = () => {
         ) : (
           <>
             <h2>Season One</h2>
-            <h3>**Advanced analytics not available</h3>
-            <h3>
+
+            <div style={{ textAlign: "center" }}>
+              **advanced analytics not available
+              <br></br>
+              <br></br>
               Yiqi: 14 <br></br>
               Mickias: 11 <br></br>
               Rob:11 <br></br>
               Dylan: 6 <br></br>
               Gray: 1 <br></br>
               Jacqueline: 1
-            </h3>
+            </div>
           </>
         )}
       </>

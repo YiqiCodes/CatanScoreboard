@@ -13,7 +13,7 @@ const CitiesAndKnights = () => {
       <OutterGameContainerDiv>
         <HeaderBarCK></HeaderBarCK>
         <Link to="/">
-          <GoBackButton> Go Back</GoBackButton>
+          <GoBackButton style={{ marginTop: "1rem" }}> Go Back</GoBackButton>
         </Link>
       </OutterGameContainerDiv>
     </>

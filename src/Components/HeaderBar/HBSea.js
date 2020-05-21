@@ -7,6 +7,7 @@ import {
   ScoreContainerDiv,
   ScoreNameDiv,
   TotalWinsDiv,
+  TextInformationDiv,
 } from "./HeaderBar.styles.js";
 
 const HeaderBarSea = () => {
@@ -15,18 +16,18 @@ const HeaderBarSea = () => {
       <TitleDiv>Seafarers</TitleDiv>
       <ScoreContainerDiv>
         <ScoreNameDiv>
-          <p>Players</p>
-          <p>Dylan</p>
-          <p>Mickias</p>
-          <p>Rob</p>
-          <p>Yiqi</p>
+          <TextInformationDiv>Players</TextInformationDiv>
+          <TextInformationDiv>Dylan</TextInformationDiv>
+          <TextInformationDiv>Mickias</TextInformationDiv>
+          <TextInformationDiv>Rob</TextInformationDiv>
+          <TextInformationDiv>Yiqi</TextInformationDiv>
         </ScoreNameDiv>
         <TotalWinsDiv>
-          <p>Total Wins</p>
-          <p>1</p>
-          <p>0</p>
-          <p>0</p>
-          <p>0</p>
+          <TextInformationDiv>Wins</TextInformationDiv>
+          <TextInformationDiv>1</TextInformationDiv>
+          <TextInformationDiv>0</TextInformationDiv>
+          <TextInformationDiv>0</TextInformationDiv>
+          <TextInformationDiv>0</TextInformationDiv>
         </TotalWinsDiv>
       </ScoreContainerDiv>
     </HeaderContainerDiv>

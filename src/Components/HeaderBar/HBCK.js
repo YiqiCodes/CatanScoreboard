@@ -7,6 +7,7 @@ import {
   ScoreContainerDiv,
   ScoreNameDiv,
   TotalWinsDiv,
+  TextInformationDiv,
 } from "./HeaderBar.styles.js";
 
 const HeaderBarCK = () => {
@@ -15,18 +16,18 @@ const HeaderBarCK = () => {
       <TitleDiv>Cities & Knights</TitleDiv>
       <ScoreContainerDiv>
         <ScoreNameDiv>
-          <p>Players</p>
-          <p>Dylan</p>
-          <p>Yiqi</p>
-          <p>Mickias</p>
-          <p>Rob</p>
+          <TextInformationDiv>Players</TextInformationDiv>
+          <TextInformationDiv>Dylan</TextInformationDiv>
+          <TextInformationDiv>Yiqi</TextInformationDiv>
+          <TextInformationDiv>Mickias</TextInformationDiv>
+          <TextInformationDiv>Rob</TextInformationDiv>
         </ScoreNameDiv>
         <TotalWinsDiv>
-          <p>Total Wins</p>
-          <p>2</p>
-          <p>1</p>
-          <p>0</p>
-          <p>0</p>
+          <TextInformationDiv>Wins</TextInformationDiv>
+          <TextInformationDiv>2</TextInformationDiv>
+          <TextInformationDiv>1</TextInformationDiv>
+          <TextInformationDiv>0</TextInformationDiv>
+          <TextInformationDiv>0</TextInformationDiv>
         </TotalWinsDiv>
       </ScoreContainerDiv>
     </HeaderContainerDiv>

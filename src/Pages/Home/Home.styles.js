@@ -18,12 +18,12 @@ export const HomeContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: slategray;
+  background: #2d3842;
 `;
 
 export const GameImage = styled.img`
   height: 8rem;
   width: 8rem;
-  padding: 5px;
-  margin: 1rem;
+  padding: 2px;
+  margin: 5px;
 `;

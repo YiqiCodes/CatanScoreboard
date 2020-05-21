@@ -18,6 +18,7 @@ export const IndividualGameContainer = styled.div`
   border-radius: 12px;
   margin: 1rem;
   padding: 1rem;
+  text-align: center;
 `;
 
 export const ToggleSeasonButton = styled.button`
