@@ -30,3 +30,8 @@ export const ToggleSeasonButton = styled.button`
   background: #423826;
   color: white;
 `;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`;

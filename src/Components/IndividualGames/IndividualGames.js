@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-// import SeasonTwoCatanScores from "../../Helpers/GameData";
 import {
   IndividualGamesContainer,
   IndividualGameContainer,
   ToggleSeasonButton,
+  ButtonContainer,
 } from "./IndividualGames.styles.js";
 
 const IndividualGames = () => {
@@ -24,11 +25,17 @@ const IndividualGames = () => {
   return (
     <IndividualGamesContainer>
       <>
-        <div>
+        <ButtonContainer>
           <form onSubmit={handleSeasonSubmit}>
             <ToggleSeasonButton>Toggle Season</ToggleSeasonButton>
           </form>
-        </div>
+          <Link to="/">
+            <ToggleSeasonButton style={{ background: "#8f836f" }}>
+              {" "}
+              Go Back
+            </ToggleSeasonButton>
+          </Link>
+        </ButtonContainer>
         {season === 2 ? (
           <>
             <h2>Season Two</h2>

@@ -20,9 +20,6 @@ const SettlersOfCatan = () => {
         <ScrollableContainerDiv>
           <IndividualGames />
         </ScrollableContainerDiv>
-        <Link to="/">
-          <GoBackButton> Go Back</GoBackButton>
-        </Link>
       </OutterGameContainerDiv>
     </>
   );

@@ -16,7 +16,7 @@ export const ScrollableContainerDiv = styled.div`
   justify-content: center;
   position: absolute;
   top: 30%;
-  height: 62.5%;
+  height: 70%;
   width: 100%;
   overflow-y: scroll;
   background: slategray;
@@ -28,7 +28,7 @@ export const GoBackButton = styled.div`
   background: #8f836f;
   color: white;
   bottom: 0;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   width: 10rem;
   border-radius: 5px;
   height: 2rem;
