@@ -5,7 +5,7 @@ export const OutterGameContainerDiv = styled.div`
   width: 100vw;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   background: #000000;
   color: white;

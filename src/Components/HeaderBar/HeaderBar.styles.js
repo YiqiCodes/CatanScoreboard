@@ -7,8 +7,6 @@ export const HeaderContainerDiv = styled.div`
   align-items: center;
   height: 40%;
   width: 100%;
-  position: fixed;
-  top: 0;
   background: black;
   color: white;
 `;
@@ -20,6 +18,7 @@ export const TitleDiv = styled.div`
   height: 5%;
   padding: 5px;
   width: 100%;
+  margin: 5px;
 `;
 
 export const ScoreContainerDiv = styled.div`

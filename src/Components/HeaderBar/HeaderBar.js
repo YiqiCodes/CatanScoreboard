@@ -12,7 +12,7 @@ import {
 
 const HeaderBar = () => {
   return (
-    <HeaderContainerDiv>
+    <HeaderContainerDiv style={{ position: "fixed", top: "0" }}>
       <TitleDiv>Catan</TitleDiv>
       <ScoreContainerDiv>
         <ScoreNameDiv>
