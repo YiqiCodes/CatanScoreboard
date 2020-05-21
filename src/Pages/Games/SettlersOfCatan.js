@@ -15,7 +15,7 @@ import {
 const SettlersOfCatan = () => {
   return (
     <>
-      <OutterGameContainerDiv>
+      <OutterGameContainerDiv style={{ justifyContent: "flex-end" }}>
         <HeaderBar></HeaderBar>
         <ScrollableContainerDiv>
           <IndividualGames />
