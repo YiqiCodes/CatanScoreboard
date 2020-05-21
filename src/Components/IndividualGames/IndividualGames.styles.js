@@ -26,6 +26,6 @@ export const ToggleSeasonButton = styled.button`
   margin: 0.5rem;
   padding: 2px;
   border-radius: 5px;
-  background: #9c8479;
+  background: #423826;
   color: white;
 `;

@@ -7,7 +7,7 @@ export const HeaderContainerDiv = styled.div`
   align-items: center;
   height: 40%;
   width: 100%;
-  background: black;
+  background: slategray;
   color: white;
 `;
 

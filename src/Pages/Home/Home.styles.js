@@ -18,7 +18,7 @@ export const HomeContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 1;
+  background: slategray;
 `;
 
 export const GameImage = styled.img`
@@ -26,10 +26,4 @@ export const GameImage = styled.img`
   width: 8rem;
   padding: 5px;
   margin: 1rem;
-`;
-export const BackgroundImage = styled.img`
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  z-index: 0;
 `;
