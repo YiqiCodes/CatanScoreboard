@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 
-import { IndividualGamesContainer } from "./IndividualGames.styles.js";
+// import SeasonTwoCatanScores from "../../Helpers/GameData";
+import {
+  IndividualGamesContainer,
+  IndividualGameContainer,
+  ToggleSeasonButton,
+} from "./IndividualGames.styles.js";
 
 const IndividualGames = () => {
   const [season, setSeason] = useState(2);
@@ -21,18 +26,44 @@ const IndividualGames = () => {
       <>
         <div>
           <form onSubmit={handleSeasonSubmit}>
-            <button style={{ color: "white" }}>Toggle Season</button>
+            <ToggleSeasonButton>Toggle Season</ToggleSeasonButton>
           </form>
         </div>
         {season === 2 ? (
           <>
             <h2>Season Two</h2>
-            <h3>
-              Yiqi: 1 <br></br>
-              Mickias: 1 <br></br>
-              Rob:0 <br></br>
-              Dylan:1 <br></br>
-            </h3>
+            <IndividualGameContainer>
+              Total Points: <br></br>
+              <br></br>
+              Yiqi: 23 <br></br>
+              Mickias: 20 <br></br>
+              Dylan: 19 <br></br>
+              Rob: 16
+            </IndividualGameContainer>
+            <IndividualGameContainer>
+              Game 3: <br></br>
+              <br></br>
+              Dylan: 10 <br></br>
+              Mickias: 6 <br></br>
+              Yiqi: 5 <br></br>
+              Rob: 4 <br></br>
+            </IndividualGameContainer>
+            <IndividualGameContainer>
+              Game 2: <br></br>
+              <br></br>
+              Yiqi: 10 <br></br>
+              Rob: 6 <br></br>
+              Mickias: 4 <br></br>
+              Dylan: 3 <br></br>
+            </IndividualGameContainer>
+            <IndividualGameContainer>
+              Game 1: <br></br>
+              <br></br>
+              Mickias: 10 <br></br>
+              Yiqi: 8 <br></br>
+              Dylan: 6 <br></br>
+              Rob: 6 <br></br>
+            </IndividualGameContainer>
           </>
         ) : (
           <>
