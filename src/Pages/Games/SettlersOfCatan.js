@@ -1,16 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 // Components
 import HeaderBar from "../../Components/HeaderBar/HeaderBar";
 import IndividualGames from "../../Components/IndividualGames/IndividualGames";
 
 // Styles
-import {
-  OutterGameContainerDiv,
-  ScrollableContainerDiv,
-  GoBackButton,
-} from "./Games.styles";
+import { OutterGameContainerDiv, ScrollableContainerDiv } from "./Games.styles";
 
 const SettlersOfCatan = () => {
   return (
