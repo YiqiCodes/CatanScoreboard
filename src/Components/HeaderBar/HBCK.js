@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 // Styles
 import {
@@ -11,6 +12,14 @@ import {
 } from "./HeaderBar.styles.js";
 
 const HeaderBarCK = () => {
+  const [ckgamesscore, setCKGamesScore] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:8001/api/users/adam").then((response) => {
+      setCKGamesScore(response.data[0].games.cities);
+    });
+  }, [ckgamesscore]);
+
   return (
     <HeaderContainerDiv>
       <TitleDiv>Cities & Knights</TitleDiv>
@@ -24,10 +33,12 @@ const HeaderBarCK = () => {
         </ScoreNameDiv>
         <TotalWinsDiv>
           <TextInformationDiv>Wins</TextInformationDiv>
-          <TextInformationDiv>2</TextInformationDiv>
-          <TextInformationDiv>1</TextInformationDiv>
-          <TextInformationDiv>0</TextInformationDiv>
-          <TextInformationDiv>0</TextInformationDiv>
+          <TextInformationDiv>
+            {ckgamesscore[0]} <br></br>
+          </TextInformationDiv>
+          <TextInformationDiv> {ckgamesscore[3]}</TextInformationDiv>
+          <TextInformationDiv> {ckgamesscore[2]}</TextInformationDiv>
+          <TextInformationDiv> {ckgamesscore[1]}</TextInformationDiv>
         </TotalWinsDiv>
       </ScoreContainerDiv>
     </HeaderContainerDiv>

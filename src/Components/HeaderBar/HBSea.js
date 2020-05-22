@@ -1,5 +1,5 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 // Styles
 import {
   HeaderContainerDiv,
@@ -11,6 +11,14 @@ import {
 } from "./HeaderBar.styles.js";
 
 const HeaderBarSea = () => {
+  const [seagamesscore, setSeaGamesScore] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:8001/api/users/adam").then((response) => {
+      setSeaGamesScore(response.data[0].games.sea);
+    });
+  }, [seagamesscore]);
+
   return (
     <HeaderContainerDiv>
       <TitleDiv>Seafarers</TitleDiv>
@@ -24,10 +32,10 @@ const HeaderBarSea = () => {
         </ScoreNameDiv>
         <TotalWinsDiv>
           <TextInformationDiv>Wins</TextInformationDiv>
-          <TextInformationDiv>1</TextInformationDiv>
-          <TextInformationDiv>0</TextInformationDiv>
-          <TextInformationDiv>0</TextInformationDiv>
-          <TextInformationDiv>0</TextInformationDiv>
+          <TextInformationDiv>{seagamesscore[0]}</TextInformationDiv>
+          <TextInformationDiv>{seagamesscore[1]}</TextInformationDiv>
+          <TextInformationDiv>{seagamesscore[2]}</TextInformationDiv>
+          <TextInformationDiv>{seagamesscore[3]}</TextInformationDiv>
         </TotalWinsDiv>
       </ScoreContainerDiv>
     </HeaderContainerDiv>

@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+
+import axios from "axios";
 
 import {
   IndividualGamesContainer,
@@ -10,6 +12,7 @@ import {
 
 const IndividualGames = () => {
   const [season, setSeason] = useState(2);
+  const [gamesscore, setGamesScore] = useState([]);
 
   const handleSeasonSubmit = (event) => {
     if (season === 2) {
@@ -22,9 +25,16 @@ const IndividualGames = () => {
     }
   };
 
+  useEffect(() => {
+    axios.get("http://localhost:8001/api/users/adam").then((response) => {
+      setGamesScore(response.data[0].games);
+    });
+  }, [gamesscore]);
+
   return (
     <IndividualGamesContainer>
       <>
+        {/* <div>{`hi, ${term.name}`}</div> */}
         <ButtonContainer>
           <form onSubmit={handleSeasonSubmit}>
             <ToggleSeasonButton>Toggle Season</ToggleSeasonButton>
@@ -80,10 +90,10 @@ const IndividualGames = () => {
               **advanced analytics not available
               <br></br>
               <br></br>
-              Yiqi: 14 <br></br>
-              Mickias: 11 <br></br>
-              Rob:11 <br></br>
-              Dylan: 6 <br></br>
+              {`Yiqi: ${gamesscore.catan[3]}`} <br></br>
+              {`Mickias: ${gamesscore.catan[1]}`} <br></br>
+              {`Rob: ${gamesscore.catan[2]}`} <br></br>
+              {`Dylan: ${gamesscore.catan[0]}`} <br></br>
               Gray: 1 <br></br>
               Jacqueline: 1
             </div>
