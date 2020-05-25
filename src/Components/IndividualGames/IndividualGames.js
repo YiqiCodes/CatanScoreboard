@@ -13,6 +13,7 @@ import {
 const IndividualGames = () => {
   const [season, setSeason] = useState(2);
   const [gamesscore, setGamesScore] = useState([]);
+  const [seasonTwoScore, setSeasonTwoScore] = useState([]);
 
   const handleSeasonSubmit = (event) => {
     if (season === 2) {
@@ -29,8 +30,15 @@ const IndividualGames = () => {
     axios.get("http://localhost:8001/api/users/adam").then((response) => {
       setGamesScore(response.data[0].games);
     });
-  }, [gamesscore]);
+  }, []);
 
+  useEffect(() => {
+    axios.get("http://localhost:8001/api/users/adam").then((response) => {
+      setSeasonTwoScore(response.data[0].games.catantwo);
+    });
+  }, []);
+
+  console.log(seasonTwoScore);
   return (
     <IndividualGamesContainer>
       <>
@@ -57,15 +65,18 @@ const IndividualGames = () => {
               Dylan: 19 <br></br>
               Rob: 16
             </IndividualGameContainer>
-            <IndividualGameContainer>
-              Game 3: <br></br>
-              <br></br>
-              Dylan: 10 <br></br>
-              Mickias: 6 <br></br>
-              Yiqi: 5 <br></br>
-              Rob: 4 <br></br>
-            </IndividualGameContainer>
-            <IndividualGameContainer>
+            {seasonTwoScore.map((game) => {
+              return (
+                <IndividualGameContainer>
+                  Dylan: {game[0]} <br></br>
+                  Mickias: {game[1]} <br></br>
+                  Rob: {game[2]} <br></br>
+                  Yiqi: {game[3]} <br></br>
+                </IndividualGameContainer>
+              );
+            })}
+
+            {/* <IndividualGameContainer>
               Game 2: <br></br>
               <br></br>
               Yiqi: 10 <br></br>
@@ -80,7 +91,7 @@ const IndividualGames = () => {
               Yiqi: 8 <br></br>
               Dylan: 6 <br></br>
               Rob: 6 <br></br>
-            </IndividualGameContainer>
+            </IndividualGameContainer> */}
           </>
         ) : (
           <>
