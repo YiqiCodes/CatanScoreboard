@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 // Styles
 import {
@@ -12,6 +13,14 @@ import {
 } from "./HeaderBar.styles.js";
 
 const HeaderBar = () => {
+  const [gamescatanscore, setGamesCatanScore] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:8001/api/users/adam").then((response) => {
+      setGamesCatanScore(response.data[0].games.catan);
+    });
+  }, [gamescatanscore]);
+
   return (
     <HeaderContainerDiv style={{ position: "fixed", top: "0" }}>
       <TitleDiv>Catan</TitleDiv>
@@ -39,10 +48,10 @@ const HeaderBar = () => {
         </SeasonWinsDiv>
         <SeasonWinsDiv>
           <TextInformationDiv>Season One</TextInformationDiv>
-          <TextInformationDiv>14</TextInformationDiv>
-          <TextInformationDiv>11</TextInformationDiv>
-          <TextInformationDiv>11</TextInformationDiv>
-          <TextInformationDiv>6</TextInformationDiv>
+          <TextInformationDiv>{gamescatanscore[3]}</TextInformationDiv>
+          <TextInformationDiv>{gamescatanscore[2]}</TextInformationDiv>
+          <TextInformationDiv>{gamescatanscore[1]}</TextInformationDiv>
+          <TextInformationDiv>{gamescatanscore[0]}</TextInformationDiv>
         </SeasonWinsDiv>
       </ScoreContainerDiv>
     </HeaderContainerDiv>
