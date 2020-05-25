@@ -14,6 +14,7 @@ const IndividualGames = () => {
   const [season, setSeason] = useState(2);
   const [gamesscore, setGamesScore] = useState([]);
   const [seasonTwoScore, setSeasonTwoScore] = useState([]);
+  const totalScores = [];
 
   const handleSeasonSubmit = (event) => {
     if (season === 2) {
@@ -38,7 +39,30 @@ const IndividualGames = () => {
     });
   }, []);
 
-  console.log(seasonTwoScore);
+  const totalPointsCalculator = (seasonTwoScore) => {
+    let dylan = 0;
+    let mickias = 0;
+    let rob = 0;
+    let yiqi = 0;
+
+    // eslint-disable-next-line
+    seasonTwoScore.map((game) => {
+      dylan += game[0];
+      mickias += game[1];
+      rob += game[2];
+      yiqi += game[3];
+    });
+
+    totalScores.push(dylan);
+    totalScores.push(mickias);
+    totalScores.push(rob);
+    totalScores.push(yiqi);
+
+    return totalScores;
+  };
+
+  totalPointsCalculator(seasonTwoScore);
+
   return (
     <IndividualGamesContainer>
       <>
@@ -49,7 +73,6 @@ const IndividualGames = () => {
           </form>
           <Link to="/">
             <ToggleSeasonButton style={{ background: "#8f836f" }}>
-              {" "}
               Go Back
             </ToggleSeasonButton>
           </Link>
@@ -60,10 +83,10 @@ const IndividualGames = () => {
             <IndividualGameContainer>
               Total Points: <br></br>
               <br></br>
-              Yiqi: 23 <br></br>
-              Mickias: 20 <br></br>
-              Dylan: 19 <br></br>
-              Rob: 16
+              Dylan: {totalScores[0]} <br></br>
+              Mickias: {totalScores[1]} <br></br>
+              Rob: {totalScores[2]} <br></br>
+              Yiqi: {totalScores[3]}
             </IndividualGameContainer>
             {seasonTwoScore.map((game) => {
               return (
@@ -75,28 +98,10 @@ const IndividualGames = () => {
                 </IndividualGameContainer>
               );
             })}
-
-            {/* <IndividualGameContainer>
-              Game 2: <br></br>
-              <br></br>
-              Yiqi: 10 <br></br>
-              Rob: 6 <br></br>
-              Mickias: 4 <br></br>
-              Dylan: 3 <br></br>
-            </IndividualGameContainer>
-            <IndividualGameContainer>
-              Game 1: <br></br>
-              <br></br>
-              Mickias: 10 <br></br>
-              Yiqi: 8 <br></br>
-              Dylan: 6 <br></br>
-              Rob: 6 <br></br>
-            </IndividualGameContainer> */}
           </>
         ) : (
           <>
             <h2>Season One</h2>
-
             <div style={{ textAlign: "center" }}>
               **advanced analytics not available
               <br></br>
