@@ -18,6 +18,7 @@ const IndividualGames = () => {
   const [season, setSeason] = useState(2);
   const [gamesscore, setGamesScore] = useState([]);
   const [seasonTwoScore, setSeasonTwoScore] = useState([]);
+  const [error, setError] = useState(false);
   const totalScores = [];
 
   useEffect(() => {
@@ -50,16 +51,24 @@ const IndividualGames = () => {
   };
 
   const handleScoreSubmit = (e) => {
-    e.preventDefault();
-    Promise.all([
-      axios.put("http://localhost:8001/api/users/update", {
-        scores,
-      }),
-    ])
-      .then(() => {
-        console.log("done");
-      })
-      .catch((error) => console.log(error));
+    // eslint-disable-next-line
+    scores.map((x) => {
+      if (x < 2 || x > 10) {
+        e.preventDefault();
+        setError(true);
+        // eslint-disable-next-line
+        return;
+      } else {
+        Promise.all([
+          axios.put("http://localhost:8001/api/users/update", { scores }),
+        ])
+          .then(() => {
+            window.location.reload(false);
+            setError(false);
+          })
+          .catch((error) => console.log(error));
+      }
+    });
   };
 
   const totalPointsCalculator = (seasonTwoScore) => {
@@ -89,6 +98,7 @@ const IndividualGames = () => {
   const renderInput = (index) => (
     <InputWrapper>
       <Input
+        style={{ textAlign: "center" }}
         value={scores[index]}
         onChange={(event) => handleChange(event, index)}
         onPressEnter={handleScoreSubmit}
@@ -103,15 +113,26 @@ const IndividualGames = () => {
           <form onSubmit={handleSeasonSubmit}>
             <ToggleSeasonButton>Toggle Season</ToggleSeasonButton>
           </form>
-          <form onSubmit={handleScoreSubmit}>
-            <ToggleSeasonButton onClick={() => window.location.reload(false)}>
-              Save Score
-            </ToggleSeasonButton>
-            {renderInput(0)}
-            {renderInput(1)}
-            {renderInput(2)}
-            {renderInput(3)}
-          </form>
+          {season === 2 ? (
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <form onSubmit={handleScoreSubmit}>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <ToggleSeasonButton style={{ background: "brown" }}>
+                    Save Score
+                  </ToggleSeasonButton>
+                </div>
+                {renderInput(0)}
+                {renderInput(1)}
+                {renderInput(2)}
+                {renderInput(3)}
+              </form>
+              {error ? (
+                <p style={{ textAlign: "center", color: "red" }}>
+                  please enter scores from 2-10
+                </p>
+              ) : null}
+            </div>
+          ) : null}
           <Link to="/">
             <ToggleSeasonButton style={{ background: "#8f836f" }}>
               Go Back
@@ -129,8 +150,7 @@ const IndividualGames = () => {
               Rob: {totalScores[2]} <br></br>
               Yiqi: {totalScores[3]}
             </IndividualGameContainer>
-            {console.log("1", seasonTwoScore)}
-            {console.log(seasonTwoScore.reverse())}
+
             {seasonTwoScore.map((game) => {
               return (
                 <IndividualGameContainer>
