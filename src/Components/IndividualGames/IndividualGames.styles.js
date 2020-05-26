@@ -35,3 +35,5 @@ export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
 `;
+
+export const InputWrapper = styled.div``;

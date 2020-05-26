@@ -3,29 +3,22 @@ import { Link } from "react-router-dom";
 
 import axios from "axios";
 
+import { Input } from "antd";
+
 import {
   IndividualGamesContainer,
   IndividualGameContainer,
   ToggleSeasonButton,
   ButtonContainer,
+  InputWrapper,
 } from "./IndividualGames.styles.js";
 
 const IndividualGames = () => {
+  const [scores, setScores] = useState([0, 0, 0, 0]);
   const [season, setSeason] = useState(2);
   const [gamesscore, setGamesScore] = useState([]);
   const [seasonTwoScore, setSeasonTwoScore] = useState([]);
   const totalScores = [];
-
-  const handleSeasonSubmit = (event) => {
-    if (season === 2) {
-      setSeason(1);
-      event.preventDefault();
-    }
-    if (season === 1) {
-      setSeason(2);
-      event.preventDefault();
-    }
-  };
 
   useEffect(() => {
     axios.get("http://localhost:8001/api/users/adam").then((response) => {
@@ -38,6 +31,36 @@ const IndividualGames = () => {
       setSeasonTwoScore(response.data[0].games.catantwo);
     });
   }, []);
+
+  const handleChange = (event, index) => {
+    const newScores = [...scores];
+    newScores[index] = event.target.value;
+    setScores(newScores);
+  };
+
+  const handleSeasonSubmit = (event) => {
+    if (season === 2) {
+      setSeason(1);
+      event.preventDefault();
+    }
+    if (season === 1) {
+      setSeason(2);
+      event.preventDefault();
+    }
+  };
+
+  const handleScoreSubmit = (e) => {
+    e.preventDefault();
+    Promise.all([
+      axios.put("http://localhost:8001/api/users/update", {
+        scores,
+      }),
+    ])
+      .then(() => {
+        console.log("done");
+      })
+      .catch((error) => console.log(error));
+  };
 
   const totalPointsCalculator = (seasonTwoScore) => {
     let dylan = 0;
@@ -63,13 +86,29 @@ const IndividualGames = () => {
 
   totalPointsCalculator(seasonTwoScore);
 
+  const renderInput = (index) => (
+    <InputWrapper>
+      <Input
+        value={scores[index]}
+        onChange={(event) => handleChange(event, index)}
+        onPressEnter={handleScoreSubmit}
+      />
+    </InputWrapper>
+  );
+
   return (
     <IndividualGamesContainer>
       <>
-        {/* <div>{`hi, ${term.name}`}</div> */}
         <ButtonContainer>
           <form onSubmit={handleSeasonSubmit}>
             <ToggleSeasonButton>Toggle Season</ToggleSeasonButton>
+          </form>
+          <form onSubmit={handleScoreSubmit}>
+            <ToggleSeasonButton>Save Score</ToggleSeasonButton>
+            {renderInput(0)}
+            {renderInput(1)}
+            {renderInput(2)}
+            {renderInput(3)}
           </form>
           <Link to="/">
             <ToggleSeasonButton style={{ background: "#8f836f" }}>
