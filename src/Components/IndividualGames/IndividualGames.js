@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-
 import axios from "axios";
-
+import { Link } from "react-router-dom";
 import { Input } from "antd";
 
 import {
@@ -11,6 +9,10 @@ import {
   ToggleSeasonButton,
   ButtonContainer,
   InputWrapper,
+  ToggleSeasonButtonDiv,
+  SaveField,
+  ScoreForm,
+  NameScore,
 } from "./IndividualGames.styles.js";
 
 const IndividualGames = () => {
@@ -18,7 +20,6 @@ const IndividualGames = () => {
   const [season, setSeason] = useState(2);
   const [gamesscore, setGamesScore] = useState([]);
   const [seasonTwoScore, setSeasonTwoScore] = useState([]);
-  const [error, setError] = useState(false);
   const totalScores = [];
 
   useEffect(() => {
@@ -51,24 +52,13 @@ const IndividualGames = () => {
   };
 
   const handleScoreSubmit = (e) => {
-    // eslint-disable-next-line
-    scores.map((x) => {
-      if (x < 2 || x > 10) {
-        e.preventDefault();
-        setError(true);
-        // eslint-disable-next-line
-        return;
-      } else {
-        Promise.all([
-          axios.put("http://localhost:8001/api/users/update", { scores }),
-        ])
-          .then(() => {
-            window.location.reload(false);
-            setError(false);
-          })
-          .catch((error) => console.log(error));
-      }
-    });
+    Promise.all([
+      axios.put("http://localhost:8001/api/users/update", { scores }),
+    ])
+      .then(() => {
+        window.location.reload(false);
+      })
+      .catch((error) => console.log(error));
   };
 
   const totalPointsCalculator = (seasonTwoScore) => {
@@ -100,6 +90,9 @@ const IndividualGames = () => {
       <Input
         style={{ textAlign: "center" }}
         value={scores[index]}
+        type="number"
+        min="2"
+        max="10"
         onChange={(event) => handleChange(event, index)}
         onPressEnter={handleScoreSubmit}
       />
@@ -110,28 +103,28 @@ const IndividualGames = () => {
     <IndividualGamesContainer>
       <>
         <ButtonContainer>
-          <form onSubmit={handleSeasonSubmit}>
-            <ToggleSeasonButton>Toggle Season</ToggleSeasonButton>
-          </form>
+          <ToggleSeasonButton onClick={handleSeasonSubmit}>
+            Toggle Season
+          </ToggleSeasonButton>
           {season === 2 ? (
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <form onSubmit={handleScoreSubmit}>
-                <div style={{ display: "flex", justifyContent: "center" }}>
+            <SaveField>
+              <ScoreForm onSubmit={handleScoreSubmit}>
+                <ToggleSeasonButtonDiv>
                   <ToggleSeasonButton style={{ background: "brown" }}>
                     Save Score
                   </ToggleSeasonButton>
-                </div>
+                </ToggleSeasonButtonDiv>
+                <h3>Submit New Game</h3>
+                <NameScore>Dylan:</NameScore>
                 {renderInput(0)}
+                <NameScore>Mickias:</NameScore>
                 {renderInput(1)}
+                <NameScore>Rob:</NameScore>
                 {renderInput(2)}
+                <NameScore>Yiqi:</NameScore>
                 {renderInput(3)}
-              </form>
-              {error ? (
-                <p style={{ textAlign: "center", color: "red" }}>
-                  please enter scores from 2-10
-                </p>
-              ) : null}
-            </div>
+              </ScoreForm>
+            </SaveField>
           ) : null}
           <Link to="/">
             <ToggleSeasonButton style={{ background: "#8f836f" }}>
@@ -150,7 +143,6 @@ const IndividualGames = () => {
               Rob: {totalScores[2]} <br></br>
               Yiqi: {totalScores[3]}
             </IndividualGameContainer>
-
             {seasonTwoScore.map((game) => {
               return (
                 <IndividualGameContainer>
