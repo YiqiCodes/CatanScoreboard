@@ -37,3 +37,31 @@ export const ButtonContainer = styled.div`
 `;
 
 export const InputWrapper = styled.div``;
+
+export const SaveField = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const ErrorText = styled.div`
+  text-align: center;
+  color: red;
+`;
+
+export const ToggleSeasonButtonDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const NameScore = styled.div`
+  padding: 5px;
+`;
+
+export const ScoreForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
