@@ -28,7 +28,7 @@ const IndividualGames = () => {
 
   useEffect(() => {
     axios.get("http://localhost:8001/api/users/adam").then((response) => {
-      setSeasonTwoScore(response.data[0].games.catantwo);
+      setSeasonTwoScore(response.data[0].newgames);
     });
   }, []);
 
@@ -104,7 +104,9 @@ const IndividualGames = () => {
             <ToggleSeasonButton>Toggle Season</ToggleSeasonButton>
           </form>
           <form onSubmit={handleScoreSubmit}>
-            <ToggleSeasonButton>Save Score</ToggleSeasonButton>
+            <ToggleSeasonButton onClick={() => window.location.reload(false)}>
+              Save Score
+            </ToggleSeasonButton>
             {renderInput(0)}
             {renderInput(1)}
             {renderInput(2)}
@@ -127,6 +129,8 @@ const IndividualGames = () => {
               Rob: {totalScores[2]} <br></br>
               Yiqi: {totalScores[3]}
             </IndividualGameContainer>
+            {console.log("1", seasonTwoScore)}
+            {console.log(seasonTwoScore.reverse())}
             {seasonTwoScore.map((game) => {
               return (
                 <IndividualGameContainer>
