@@ -92,7 +92,7 @@ const IndividualGames = () => {
     <InputWrapper>
       <Input
         style={{ textAlign: "center" }}
-        value={2}
+        value={scores[index]}
         type="number"
         min="2"
         max="10"
