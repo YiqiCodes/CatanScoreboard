@@ -158,7 +158,7 @@ const IndividualGames = () => {
           <>
             <h2>Season One</h2>
             <div style={{ textAlign: "center" }}>
-              **advanced analytics not available
+              **advanced analytics not available**
               <br></br>
               <br></br>
               {`Yiqi: ${gamesscore.catan[3]}`} <br></br>
