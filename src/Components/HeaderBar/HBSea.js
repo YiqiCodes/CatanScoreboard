@@ -14,9 +14,11 @@ const HeaderBarSea = () => {
   const [seagamesscore, setSeaGamesScore] = useState([]);
 
   useEffect(() => {
-    axios.get(`/api/users/adam`).then((response) => {
-      setSeaGamesScore(response.data[0].games.sea);
-    });
+    axios
+      .get(`https://catanscoreboard.herokuapp.com/api/users/adam`)
+      .then((response) => {
+        setSeaGamesScore(response.data[0].games.sea);
+      });
   }, [seagamesscore]);
 
   return (
