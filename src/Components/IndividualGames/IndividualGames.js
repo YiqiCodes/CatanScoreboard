@@ -22,16 +22,21 @@ const IndividualGames = () => {
   const [seasonTwoScore, setSeasonTwoScore] = useState([]);
   const totalScores = [];
 
+  const url =
+    "http://localhost:8001" || "https://catanscoreboard.herokuapp.com";
+
   useEffect(() => {
-    axios.get("http://localhost:8001/api/users/adam").then((response) => {
+    axios.get(`${url}/api/users/adam`).then((response) => {
       setGamesScore(response.data[0].games);
     });
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    axios.get("http://localhost:8001/api/users/adam").then((response) => {
+    axios.get(`${url}/api/users/adam`).then((response) => {
       setSeasonTwoScore(response.data[0].newgames);
     });
+    // eslint-disable-next-line
   }, []);
 
   const handleChange = (event, index) => {
@@ -52,9 +57,7 @@ const IndividualGames = () => {
   };
 
   const handleScoreSubmit = (e) => {
-    Promise.all([
-      axios.put("http://localhost:8001/api/users/update", { scores }),
-    ])
+    Promise.all([axios.put(`${url}/api/users/update`, { scores })])
       .then(() => {
         window.location.reload(false);
       })
@@ -89,7 +92,7 @@ const IndividualGames = () => {
     <InputWrapper>
       <Input
         style={{ textAlign: "center" }}
-        value={scores[index]}
+        value={2}
         type="number"
         min="2"
         max="10"
