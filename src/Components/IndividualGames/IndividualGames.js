@@ -15,6 +15,8 @@ import {
   NameScore,
 } from "./IndividualGames.styles.js";
 
+// axios.defaults.baseURL = "https://localhost:8001";
+
 const IndividualGames = () => {
   const [scores, setScores] = useState([0, 0, 0, 0]);
   const [season, setSeason] = useState(2);
@@ -23,16 +25,20 @@ const IndividualGames = () => {
   const totalScores = [];
 
   useEffect(() => {
-    axios.get(`/api/users/adam`).then((response) => {
-      setGamesScore(response.data[0].games);
-    });
+    axios
+      .get(`https://catanscoreboard.herokuapp.com/api/users/adam`)
+      .then((response) => {
+        setGamesScore(response.data[0].games);
+      });
     // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    axios.get(`/api/users/adam`).then((response) => {
-      setSeasonTwoScore(response.data[0].newgames);
-    });
+    axios
+      .get(`https://catanscoreboard.herokuapp.com/api/users/adam`)
+      .then((response) => {
+        setSeasonTwoScore(response.data[0].newgames);
+      });
     // eslint-disable-next-line
   }, []);
 
@@ -54,7 +60,11 @@ const IndividualGames = () => {
   };
 
   const handleScoreSubmit = (e) => {
-    Promise.all([axios.put(`/api/users/update`, { scores })])
+    Promise.all([
+      axios.put("https://catanscoreboard.herokuapp.com/api/users/update", {
+        scores,
+      }),
+    ])
       .then(() => {
         window.location.reload(false);
       })

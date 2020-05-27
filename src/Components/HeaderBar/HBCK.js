@@ -15,9 +15,11 @@ const HeaderBarCK = () => {
   const [ckgamesscore, setCKGamesScore] = useState([]);
 
   useEffect(() => {
-    axios.get(`/api/users/adam`).then((response) => {
-      setCKGamesScore(response.data[0].games.cities);
-    });
+    axios
+      .get(`https://catanscoreboard.herokuapp.com/api/users/adam`)
+      .then((response) => {
+        setCKGamesScore(response.data[0].games.cities);
+      });
   }, [ckgamesscore]);
 
   return (

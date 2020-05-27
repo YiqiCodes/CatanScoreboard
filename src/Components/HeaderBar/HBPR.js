@@ -16,9 +16,11 @@ const HeaderBarPR = () => {
   const [prgamesscore, setPRGamesScore] = useState([]);
 
   useEffect(() => {
-    axios.get(`/api/users/adam`).then((response) => {
-      setPRGamesScore(response.data[0].games.puerto);
-    });
+    axios
+      .get(`https://catanscoreboard.herokuapp.com/api/users/adam`)
+      .then((response) => {
+        setPRGamesScore(response.data[0].games.puerto);
+      });
     // eslint-disable-next-line
   }, [prgamesscore]);
 

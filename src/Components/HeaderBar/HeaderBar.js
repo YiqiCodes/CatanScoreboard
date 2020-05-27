@@ -18,15 +18,19 @@ const HeaderBar = () => {
   const totalWins = [0, 0, 0, 0];
 
   useEffect(() => {
-    axios.get(`/api/users/adam`).then((response) => {
-      setGamesCatanScore(response.data[0].games.catan);
-    });
+    axios
+      .get(`https://catanscoreboard.herokuapp.com/api/users/adam`)
+      .then((response) => {
+        setGamesCatanScore(response.data[0].games.catan);
+      });
   }, [gamescatanscore]);
 
   useEffect(() => {
-    axios.get(`/api/users/adam`).then((response) => {
-      setNewGamesCatanScore(response.data[0].newgames);
-    });
+    axios
+      .get("https://catanscoreboard.herokuapp.com/api/users/adam")
+      .then((response) => {
+        setNewGamesCatanScore(response.data[0].newgames);
+      });
   }, [newgamescatanscore]);
 
   const totalWinsCalculator = (scores) => {
