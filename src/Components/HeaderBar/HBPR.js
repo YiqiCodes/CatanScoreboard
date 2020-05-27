@@ -15,10 +15,14 @@ import {
 const HeaderBarPR = () => {
   const [prgamesscore, setPRGamesScore] = useState([]);
 
+  const url =
+    "http://localhost:8001" || "https://catanscoreboard.herokuapp.com";
+
   useEffect(() => {
-    axios.get("http://localhost:8001/api/users/adam").then((response) => {
+    axios.get(`${url}/api/users/adam`).then((response) => {
       setPRGamesScore(response.data[0].games.puerto);
     });
+    // eslint-disable-next-line
   }, [prgamesscore]);
 
   return (
