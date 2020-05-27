@@ -18,13 +18,13 @@ const HeaderBar = () => {
   const totalWins = [0, 0, 0, 0];
 
   useEffect(() => {
-    axios.get("http://localhost:8001/api/users/adam").then((response) => {
+    axios.get(`/api/users/adam`).then((response) => {
       setGamesCatanScore(response.data[0].games.catan);
     });
   }, [gamescatanscore]);
 
   useEffect(() => {
-    axios.get("http://localhost:8001/api/users/adam").then((response) => {
+    axios.get(`/api/users/adam`).then((response) => {
       setNewGamesCatanScore(response.data[0].newgames);
     });
   }, [newgamescatanscore]);

@@ -15,11 +15,8 @@ import {
 const HeaderBarPR = () => {
   const [prgamesscore, setPRGamesScore] = useState([]);
 
-  const url =
-    "http://localhost:8001" || "https://catanscoreboard.herokuapp.com";
-
   useEffect(() => {
-    axios.get(`${url}/api/users/adam`).then((response) => {
+    axios.get(`/api/users/adam`).then((response) => {
       setPRGamesScore(response.data[0].games.puerto);
     });
     // eslint-disable-next-line
