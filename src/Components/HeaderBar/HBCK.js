@@ -15,7 +15,7 @@ const HeaderBarCK = () => {
   const [ckgamesscore, setCKGamesScore] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8001/api/users/adam").then((response) => {
+    axios.get(`/api/users/adam`).then((response) => {
       setCKGamesScore(response.data[0].games.cities);
     });
   }, [ckgamesscore]);

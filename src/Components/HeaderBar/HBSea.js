@@ -14,7 +14,7 @@ const HeaderBarSea = () => {
   const [seagamesscore, setSeaGamesScore] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8001/api/users/adam").then((response) => {
+    axios.get(`/api/users/adam`).then((response) => {
       setSeaGamesScore(response.data[0].games.sea);
     });
   }, [seagamesscore]);
