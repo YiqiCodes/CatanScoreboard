@@ -25,20 +25,16 @@ const IndividualGames = () => {
   const totalScores = [];
 
   useEffect(() => {
-    axios
-      .get(`https://catanscoreboard.herokuapp.com/api/users/adam`)
-      .then((response) => {
-        setGamesScore(response.data[0].games);
-      });
+    axios.get("/api/users/adam").then((response) => {
+      setGamesScore(response.data[0].games);
+    });
     // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    axios
-      .get(`https://catanscoreboard.herokuapp.com/api/users/adam`)
-      .then((response) => {
-        setSeasonTwoScore(response.data[0].newgames);
-      });
+    axios.get("/api/users/adam").then((response) => {
+      setSeasonTwoScore(response.data[0].newgames);
+    });
     // eslint-disable-next-line
   }, []);
 
@@ -61,7 +57,7 @@ const IndividualGames = () => {
 
   const handleScoreSubmit = (e) => {
     Promise.all([
-      axios.put("https://catanscoreboard.herokuapp.com/api/users/update", {
+      axios.put("/api/users/update", {
         scores,
       }),
     ])
