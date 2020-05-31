@@ -1,49 +1,62 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+import Dylan from "../../assets/Dylan.png";
+import Mickias from "../../assets/Mickias.png";
+import Rob from "../../assets/Rob.png";
+import Yiqi from "../../assets/Yiqi.png";
+
 // Styles
 import {
-  HeaderContainerDiv,
-  TitleDiv,
+  OtherHeaderContainerDiv,
+  OtherTitleDiv,
   ScoreContainerDiv,
-  ScoreNameDiv,
   TotalWinsDiv,
   TextInformationDiv,
+  InformationColumn,
+  PlayerImage,
+  SubTitleText,
 } from "./HeaderBar.styles.js";
 
 const HeaderBarCK = () => {
   const [ckgamesscore, setCKGamesScore] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`https://catanscoreboard.herokuapp.com/api/users/adam`)
-      .then((response) => {
-        setCKGamesScore(response.data[0].games.cities);
-      });
+    axios.get(`/api/users/adam`).then((response) => {
+      setCKGamesScore(response.data[0].games.cities);
+    });
   }, [ckgamesscore]);
 
   return (
-    <HeaderContainerDiv>
-      <TitleDiv>Cities & Knights</TitleDiv>
-      <ScoreContainerDiv>
-        <ScoreNameDiv>
-          <TextInformationDiv>Players</TextInformationDiv>
-          <TextInformationDiv>Dylan</TextInformationDiv>
-          <TextInformationDiv>Yiqi</TextInformationDiv>
-          <TextInformationDiv>Mickias</TextInformationDiv>
-          <TextInformationDiv>Rob</TextInformationDiv>
-        </ScoreNameDiv>
+    <OtherHeaderContainerDiv>
+      <OtherTitleDiv>Cities & Knights</OtherTitleDiv>
+      <ScoreContainerDiv
+        style={{ width: "50%", justifyContent: "space-evenly" }}
+      >
+        <InformationColumn>
+          <SubTitleText>Settlers</SubTitleText>
+          <PlayerImage src={Dylan} alt="" />
+          <PlayerImage src={Mickias} alt="" />
+          <PlayerImage src={Rob} alt="" />
+          <PlayerImage src={Yiqi} alt="" />
+        </InformationColumn>
         <TotalWinsDiv>
-          <TextInformationDiv>Wins</TextInformationDiv>
-          <TextInformationDiv>
-            {ckgamesscore[0]} <br></br>
+          <SubTitleText>Wins</SubTitleText>
+          <TextInformationDiv style={{ background: "green" }}>
+            {ckgamesscore[0]}
           </TextInformationDiv>
-          <TextInformationDiv> {ckgamesscore[3]}</TextInformationDiv>
-          <TextInformationDiv> {ckgamesscore[2]}</TextInformationDiv>
-          <TextInformationDiv> {ckgamesscore[1]}</TextInformationDiv>
+          <TextInformationDiv style={{ background: "red" }}>
+            {ckgamesscore[1]}
+          </TextInformationDiv>
+          <TextInformationDiv style={{ background: "blue" }}>
+            {ckgamesscore[2]}
+          </TextInformationDiv>
+          <TextInformationDiv style={{ background: "orange" }}>
+            {ckgamesscore[3]}
+          </TextInformationDiv>
         </TotalWinsDiv>
       </ScoreContainerDiv>
-    </HeaderContainerDiv>
+    </OtherHeaderContainerDiv>
   );
 };
 
