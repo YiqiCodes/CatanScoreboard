@@ -15,8 +15,8 @@ export const ScrollableContainerDiv = styled.div`
   display: flex;
   justify-content: center;
   position: absolute;
-  top: 30%;
-  height: 70%;
+  top: 40%;
+  height: 60%;
   width: 100%;
   overflow-y: scroll;
   background: slategray;

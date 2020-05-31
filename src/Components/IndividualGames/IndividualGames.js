@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+
 import { Input } from "antd";
 
 import {
@@ -99,11 +99,9 @@ const IndividualGames = () => {
         style={{
           textAlign: "center",
           width: "5rem",
-          background: "#252525",
-          color: "#eeeeee",
-          textAlign: "center",
+          color: "#252525",
+          background: "#eeeeee",
           borderRadius: "6px",
-          width: "5rem",
         }}
         value={scores[index]}
         type="number"
@@ -137,11 +135,6 @@ const IndividualGames = () => {
               </ScoreForm>
             </SaveField>
           ) : null}
-          <Link to="/">
-            <ToggleSeasonButton style={{ background: "#8f836f" }}>
-              Go Back
-            </ToggleSeasonButton>
-          </Link>
         </ButtonContainer>
         {season === 2 ? (
           <>

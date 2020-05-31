@@ -76,7 +76,8 @@ export const ToggleSeasonButton = styled.button`
 
 export const ButtonContainer = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const InputWrapper = styled.div``;

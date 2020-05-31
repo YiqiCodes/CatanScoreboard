@@ -3,12 +3,14 @@ import styled from "styled-components";
 export const HeaderContainerDiv = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  height: 30%;
+  height: 40%;
   width: 100%;
   background: #2d3842;
   color: white;
+  position: fixed;
+  top: 0;
 `;
 
 export const TitleDiv = styled.div`
@@ -19,11 +21,13 @@ export const TitleDiv = styled.div`
   padding: 5px;
   width: 100%;
   margin: 5px;
+  font-size: x-large;
+  font-weight: 200;
 `;
 
-export const TextInformationDiv = styled.div`
-  font-size: small;
-  padding: 1px;
+export const PlayerImage = styled.img`
+  width: 50px;
+  height: 50px;
 `;
 
 export const ScoreContainerDiv = styled.div`
@@ -35,27 +39,41 @@ export const ScoreContainerDiv = styled.div`
   text-align: center;
 `;
 
-export const ScoreNameDiv = styled.div`
+export const InformationColumn = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   width: 20%;
   text-align: center;
+  height: 90%;
 `;
-export const TotalWinsDiv = styled.div`
+
+export const ToggleSeasonButton = styled.button`
+  position: fixed;
+  left: 0;
+  margin-left: 2rem;
+  color: #252525;
+  background: #eeeeee;
+  height: 2rem;
+  width: 4rem;
+  border-radius: 4px;
+`;
+
+export const TextInformationDiv = styled.div`
+  background: aqua;
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 20%;
-  text-align: center;
+  margin: 4px 0px;
 `;
-export const SeasonWinsDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 20%;
-  text-align: center;
+
+export const SubTitleText = styled.div`
+  font-weight: 200;
 `;
+
+export const ScoreNameDiv = styled.div``;
+export const TotalWinsDiv = styled.div``;
