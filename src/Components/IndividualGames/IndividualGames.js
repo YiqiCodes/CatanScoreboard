@@ -13,6 +13,8 @@ import {
   SaveField,
   ScoreForm,
   NameScore,
+  HexagonDiv,
+  SpacingDiv,
 } from "./IndividualGames.styles.js";
 
 // axios.defaults.baseURL = "https://localhost:8001";
@@ -94,7 +96,15 @@ const IndividualGames = () => {
   const renderInput = (index) => (
     <InputWrapper>
       <Input
-        style={{ textAlign: "center" }}
+        style={{
+          textAlign: "center",
+          width: "5rem",
+          background: "#252525",
+          color: "#eeeeee",
+          textAlign: "center",
+          borderRadius: "6px",
+          width: "5rem",
+        }}
         value={scores[index]}
         type="number"
         min="2"
@@ -116,19 +126,14 @@ const IndividualGames = () => {
             <SaveField>
               <ScoreForm onSubmit={handleScoreSubmit}>
                 <ToggleSeasonButtonDiv>
-                  <ToggleSeasonButton style={{ background: "brown" }}>
+                  <ToggleSeasonButton style={{ background: "seagreen" }}>
                     Save Score
                   </ToggleSeasonButton>
                 </ToggleSeasonButtonDiv>
-                <h3>Submit New Game</h3>
-                <NameScore>Dylan:</NameScore>
-                {renderInput(0)}
-                <NameScore>Mickias:</NameScore>
-                {renderInput(1)}
-                <NameScore>Rob:</NameScore>
-                {renderInput(2)}
-                <NameScore>Yiqi:</NameScore>
-                {renderInput(3)}
+                <NameScore>Dylan: {renderInput(0)}</NameScore>
+                <NameScore>Mickias: {renderInput(1)}</NameScore>
+                <NameScore>Rob:{renderInput(2)}</NameScore>
+                <NameScore>Yiqi:{renderInput(3)}</NameScore>
               </ScoreForm>
             </SaveField>
           ) : null}
@@ -140,7 +145,6 @@ const IndividualGames = () => {
         </ButtonContainer>
         {season === 2 ? (
           <>
-            <h2>Season Two</h2>
             <IndividualGameContainer>
               Total Points: <br></br>
               <br></br>
@@ -151,12 +155,15 @@ const IndividualGames = () => {
             </IndividualGameContainer>
             {seasonTwoScore.map((game) => {
               return (
-                <IndividualGameContainer>
-                  Dylan: {game[0]} <br></br>
-                  Mickias: {game[1]} <br></br>
-                  Rob: {game[2]} <br></br>
-                  Yiqi: {game[3]} <br></br>
-                </IndividualGameContainer>
+                <>
+                  <HexagonDiv>
+                    Dylan: {game[0]} <br></br>
+                    Mickias: {game[1]} <br></br>
+                    Rob: {game[2]} <br></br>
+                    Yiqi: {game[3]} <br></br>
+                  </HexagonDiv>
+                  <SpacingDiv></SpacingDiv>
+                </>
               );
             })}
           </>
