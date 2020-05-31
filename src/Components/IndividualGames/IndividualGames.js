@@ -17,8 +17,6 @@ import {
   SpacingDiv,
 } from "./IndividualGames.styles.js";
 
-// axios.defaults.baseURL = "https://localhost:8001";
-
 const IndividualGames = () => {
   const [scores, setScores] = useState([0, 0, 0, 0]);
   const [season, setSeason] = useState(2);

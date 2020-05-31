@@ -13,6 +13,16 @@ export const HeaderContainerDiv = styled.div`
   top: 0;
 `;
 
+export const OtherHeaderContainerDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background: #2d3842;
+  color: white;
+`;
+
 export const TitleDiv = styled.div`
   justify-content: center;
   display: flex;
@@ -20,6 +30,16 @@ export const TitleDiv = styled.div`
   height: 5%;
   padding: 5px;
   width: 100%;
+  margin: 5px;
+  font-size: x-large;
+  font-weight: 200;
+`;
+
+export const OtherTitleDiv = styled.div`
+  justify-content: center;
+  display: flex;
+  text-align: center;
+  padding: 5px;
   margin: 5px;
   font-size: x-large;
   font-weight: 200;

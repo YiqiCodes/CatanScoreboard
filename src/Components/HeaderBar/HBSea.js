@@ -1,46 +1,62 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+
+import Dylan from "../../assets/Dylan.png";
+import Mickias from "../../assets/Mickias.png";
+import Rob from "../../assets/Rob.png";
+import Yiqi from "../../assets/Yiqi.png";
+
 // Styles
 import {
-  HeaderContainerDiv,
-  TitleDiv,
+  OtherHeaderContainerDiv,
+  OtherTitleDiv,
   ScoreContainerDiv,
-  ScoreNameDiv,
   TotalWinsDiv,
   TextInformationDiv,
+  InformationColumn,
+  PlayerImage,
+  SubTitleText,
 } from "./HeaderBar.styles.js";
 
 const HeaderBarSea = () => {
   const [seagamesscore, setSeaGamesScore] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`https://catanscoreboard.herokuapp.com/api/users/adam`)
-      .then((response) => {
-        setSeaGamesScore(response.data[0].games.sea);
-      });
+    axios.get(`/api/users/adam`).then((response) => {
+      setSeaGamesScore(response.data[0].games.sea);
+    });
   }, [seagamesscore]);
 
   return (
-    <HeaderContainerDiv>
-      <TitleDiv>Seafarers</TitleDiv>
-      <ScoreContainerDiv>
-        <ScoreNameDiv>
-          <TextInformationDiv>Players</TextInformationDiv>
-          <TextInformationDiv>Dylan</TextInformationDiv>
-          <TextInformationDiv>Mickias</TextInformationDiv>
-          <TextInformationDiv>Rob</TextInformationDiv>
-          <TextInformationDiv>Yiqi</TextInformationDiv>
-        </ScoreNameDiv>
+    <OtherHeaderContainerDiv>
+      <OtherTitleDiv>Seafarers</OtherTitleDiv>
+      <ScoreContainerDiv
+        style={{ width: "50%", justifyContent: "space-evenly" }}
+      >
+        <InformationColumn>
+          <SubTitleText>Settlers</SubTitleText>
+          <PlayerImage src={Dylan} alt="" />
+          <PlayerImage src={Mickias} alt="" />
+          <PlayerImage src={Rob} alt="" />
+          <PlayerImage src={Yiqi} alt="" />
+        </InformationColumn>
         <TotalWinsDiv>
-          <TextInformationDiv>Wins</TextInformationDiv>
-          <TextInformationDiv>{seagamesscore[0]}</TextInformationDiv>
-          <TextInformationDiv>{seagamesscore[1]}</TextInformationDiv>
-          <TextInformationDiv>{seagamesscore[2]}</TextInformationDiv>
-          <TextInformationDiv>{seagamesscore[3]}</TextInformationDiv>
+          <SubTitleText>Wins</SubTitleText>
+          <TextInformationDiv style={{ background: "green" }}>
+            {seagamesscore[0]}
+          </TextInformationDiv>
+          <TextInformationDiv style={{ background: "red" }}>
+            {seagamesscore[1]}
+          </TextInformationDiv>
+          <TextInformationDiv style={{ background: "blue" }}>
+            {seagamesscore[2]}
+          </TextInformationDiv>
+          <TextInformationDiv style={{ background: "orange" }}>
+            {seagamesscore[3]}
+          </TextInformationDiv>
         </TotalWinsDiv>
       </ScoreContainerDiv>
-    </HeaderContainerDiv>
+    </OtherHeaderContainerDiv>
   );
 };
 

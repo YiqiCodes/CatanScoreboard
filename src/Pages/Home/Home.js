@@ -14,7 +14,6 @@ const Home = () => {
   return (
     <>
       <HomeContainer>
-        {/* <h2>Scoreboard</h2> */}
         <Link to="/catan">
           <GameImage src={CatanOG} alt="" />
         </Link>
