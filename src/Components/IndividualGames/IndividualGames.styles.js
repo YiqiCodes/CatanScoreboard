@@ -27,6 +27,7 @@ export const IndividualGameContainer = styled.div`
 
 export const HexagonDiv = styled.div`
   position: relative;
+  flex-direction: column;
   width: 300px;
   height: 173.21px;
   background-color: #252525;
@@ -105,10 +106,4 @@ export const NameScore = styled.div`
   display: flex;
   width: 10rem;
   justify-content: space-between;
-`;
-
-export const ScoreForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 `;

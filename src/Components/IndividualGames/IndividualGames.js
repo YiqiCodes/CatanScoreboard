@@ -3,6 +3,8 @@ import axios from "axios";
 
 import { Input } from "antd";
 
+import oldGames from "../../Pages/Helpers/OldData";
+
 import {
   IndividualGamesContainer,
   IndividualGameContainer,
@@ -11,7 +13,6 @@ import {
   InputWrapper,
   ToggleSeasonButtonDiv,
   SaveField,
-  ScoreForm,
   NameScore,
   HexagonDiv,
   SpacingDiv,
@@ -20,20 +21,15 @@ import {
 const IndividualGames = () => {
   const [scores, setScores] = useState([0, 0, 0, 0]);
   const [season, setSeason] = useState(2);
-  const [gamesscore, setGamesScore] = useState([]);
   const [seasonTwoScore, setSeasonTwoScore] = useState([]);
   const totalScores = [];
 
-  useEffect(() => {
-    axios.get("/api/users/adam").then((response) => {
-      setGamesScore(response.data[0].games);
-    });
-    // eslint-disable-next-line
-  }, []);
+  // wrap into async await or do webhooks
 
   useEffect(() => {
-    axios.get("/api/users/adam").then((response) => {
-      setSeasonTwoScore(response.data[0].newgames);
+    axios.get("/api/games/").then((response) => {
+      console.log("response", response.data);
+      setSeasonTwoScore(response.data);
     });
     // eslint-disable-next-line
   }, []);
@@ -56,13 +52,10 @@ const IndividualGames = () => {
   };
 
   const handleScoreSubmit = (e) => {
-    Promise.all([
-      axios.put("/api/users/update", {
-        scores,
-      }),
-    ])
-      .then(() => {
-        window.location.reload(false);
+    axios
+      .put("/api/users/update", { scores })
+      .then((response) => {
+        e.preventDefault();
       })
       .catch((error) => console.log(error));
   };
@@ -111,6 +104,10 @@ const IndividualGames = () => {
     </InputWrapper>
   );
 
+  const uniqueGameIds = [
+    ...new Set(seasonTwoScore.map((game) => game.game_id)),
+  ];
+
   return (
     <IndividualGamesContainer>
       <>
@@ -120,17 +117,18 @@ const IndividualGames = () => {
           </ToggleSeasonButton>
           {season === 2 ? (
             <SaveField>
-              <ScoreForm onSubmit={handleScoreSubmit}>
-                <ToggleSeasonButtonDiv>
-                  <ToggleSeasonButton style={{ background: "seagreen" }}>
-                    Save Score
-                  </ToggleSeasonButton>
-                </ToggleSeasonButtonDiv>
-                <NameScore>Dylan: {renderInput(0)}</NameScore>
-                <NameScore>Mickias: {renderInput(1)}</NameScore>
-                <NameScore>Rob:{renderInput(2)}</NameScore>
-                <NameScore>Yiqi:{renderInput(3)}</NameScore>
-              </ScoreForm>
+              <ToggleSeasonButtonDiv>
+                <ToggleSeasonButton
+                  onClick={handleScoreSubmit}
+                  style={{ background: "seagreen" }}
+                >
+                  Save Score
+                </ToggleSeasonButton>
+              </ToggleSeasonButtonDiv>
+              <NameScore>Dylan: {renderInput(0)}</NameScore>
+              <NameScore>Mickias: {renderInput(1)}</NameScore>
+              <NameScore>Rob:{renderInput(2)}</NameScore>
+              <NameScore>Yiqi:{renderInput(3)}</NameScore>
             </SaveField>
           ) : null}
         </ButtonContainer>
@@ -144,14 +142,18 @@ const IndividualGames = () => {
               Rob: {totalScores[2]} <br></br>
               Yiqi: {totalScores[3]}
             </IndividualGameContainer>
-            {seasonTwoScore.map((game) => {
+            {uniqueGameIds.map((gameID) => {
+              const filteredGames = seasonTwoScore.filter(
+                (game) => game.game_id === gameID
+              );
               return (
                 <>
                   <HexagonDiv>
-                    Dylan: {game[0]} <br></br>
-                    Mickias: {game[1]} <br></br>
-                    Rob: {game[2]} <br></br>
-                    Yiqi: {game[3]} <br></br>
+                    {filteredGames.map((filteredGame) => {
+                      return (
+                        <div>{`${filteredGame.name}: ${filteredGame.score} `}</div>
+                      );
+                    })}
                   </HexagonDiv>
                   <SpacingDiv></SpacingDiv>
                 </>
@@ -162,15 +164,13 @@ const IndividualGames = () => {
           <>
             <h2>Season One</h2>
             <div style={{ textAlign: "center" }}>
-              **advanced analytics not available**
-              <br></br>
-              <br></br>
-              {`Yiqi: ${gamesscore.catan[3]}`} <br></br>
-              {`Mickias: ${gamesscore.catan[1]}`} <br></br>
-              {`Rob: ${gamesscore.catan[2]}`} <br></br>
-              {`Dylan: ${gamesscore.catan[0]}`} <br></br>
-              Gray: 1 <br></br>
-              Jacqueline: 1
+              <div> **advanced analytics not available** </div>
+              <div> {`Yiqi: ${oldGames.catanSeasonOne[3]}`} </div>
+              <div> {`Mickias: ${oldGames.catanSeasonOne[1]}`} </div>
+              <div> {`Rob: ${oldGames.catanSeasonOne[2]}`} </div>
+              <div>{`Dylan: ${oldGames.catanSeasonOne[0]}`} </div>
+              <div> Gray: 1 </div>
+              <div> Jacqueline: 1 </div>
             </div>
           </>
         )}

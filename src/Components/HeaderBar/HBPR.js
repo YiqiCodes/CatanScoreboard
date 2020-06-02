@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-
-import axios from "axios";
+import React from "react";
 
 import Dylan from "../../assets/Dylan.png";
 import Mickias from "../../assets/Mickias.png";
 import Rob from "../../assets/Rob.png";
 import Yiqi from "../../assets/Yiqi.png";
+
+import oldGames from "../../Pages/Helpers/OldData";
 
 // Styles
 import {
@@ -20,15 +20,6 @@ import {
 } from "./HeaderBar.styles.js";
 
 const HeaderBarPR = () => {
-  const [prgamesscore, setPRGamesScore] = useState([]);
-
-  useEffect(() => {
-    axios.get(`/api/users/adam`).then((response) => {
-      setPRGamesScore(response.data[0].games.puerto);
-    });
-    // eslint-disable-next-line
-  }, [prgamesscore]);
-
   return (
     <OtherHeaderContainerDiv>
       <OtherTitleDiv>Puerto Rico</OtherTitleDiv>
@@ -45,16 +36,16 @@ const HeaderBarPR = () => {
         <TotalWinsDiv>
           <SubTitleText>Wins</SubTitleText>
           <TextInformationDiv style={{ background: "green" }}>
-            {prgamesscore[0]}
+            {oldGames.puertoRico[0]}
           </TextInformationDiv>
           <TextInformationDiv style={{ background: "red" }}>
-            {prgamesscore[1]}
+            {oldGames.puertoRico[1]}
           </TextInformationDiv>
           <TextInformationDiv style={{ background: "blue" }}>
-            {prgamesscore[2]}
+            {oldGames.puertoRico[2]}
           </TextInformationDiv>
           <TextInformationDiv style={{ background: "orange" }}>
-            {prgamesscore[3]}
+            {oldGames.puertoRico[3]}
           </TextInformationDiv>
         </TotalWinsDiv>
       </ScoreContainerDiv>
