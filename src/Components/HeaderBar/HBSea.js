@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 
 import Dylan from "../../assets/Dylan.png";
 import Mickias from "../../assets/Mickias.png";
 import Rob from "../../assets/Rob.png";
 import Yiqi from "../../assets/Yiqi.png";
+
+import oldGames from "../../Pages/Helpers/OldData";
 
 // Styles
 import {
@@ -19,14 +20,6 @@ import {
 } from "./HeaderBar.styles.js";
 
 const HeaderBarSea = () => {
-  const [seagamesscore, setSeaGamesScore] = useState([]);
-
-  useEffect(() => {
-    axios.get(`/api/users/adam`).then((response) => {
-      setSeaGamesScore(response.data[0].games.sea);
-    });
-  }, [seagamesscore]);
-
   return (
     <OtherHeaderContainerDiv>
       <OtherTitleDiv>Seafarers</OtherTitleDiv>
@@ -43,16 +36,16 @@ const HeaderBarSea = () => {
         <TotalWinsDiv>
           <SubTitleText>Wins</SubTitleText>
           <TextInformationDiv style={{ background: "green" }}>
-            {seagamesscore[0]}
+            {oldGames.seafarers[0]}
           </TextInformationDiv>
           <TextInformationDiv style={{ background: "red" }}>
-            {seagamesscore[1]}
+            {oldGames.seafarers[1]}
           </TextInformationDiv>
           <TextInformationDiv style={{ background: "blue" }}>
-            {seagamesscore[2]}
+            {oldGames.seafarers[2]}
           </TextInformationDiv>
           <TextInformationDiv style={{ background: "orange" }}>
-            {seagamesscore[3]}
+            {oldGames.seafarers[3]}
           </TextInformationDiv>
         </TotalWinsDiv>
       </ScoreContainerDiv>

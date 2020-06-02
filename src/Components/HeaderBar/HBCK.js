@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 
 import Dylan from "../../assets/Dylan.png";
 import Mickias from "../../assets/Mickias.png";
 import Rob from "../../assets/Rob.png";
 import Yiqi from "../../assets/Yiqi.png";
+
+import oldGames from "../../Pages/Helpers/OldData";
 
 // Styles
 import {
@@ -19,14 +20,6 @@ import {
 } from "./HeaderBar.styles.js";
 
 const HeaderBarCK = () => {
-  const [ckgamesscore, setCKGamesScore] = useState([]);
-
-  useEffect(() => {
-    axios.get(`/api/users/adam`).then((response) => {
-      setCKGamesScore(response.data[0].games.cities);
-    });
-  }, [ckgamesscore]);
-
   return (
     <OtherHeaderContainerDiv>
       <OtherTitleDiv>Cities & Knights</OtherTitleDiv>
@@ -43,16 +36,16 @@ const HeaderBarCK = () => {
         <TotalWinsDiv>
           <SubTitleText>Wins</SubTitleText>
           <TextInformationDiv style={{ background: "green" }}>
-            {ckgamesscore[0]}
+            {oldGames.citiesAndKnights[0]}
           </TextInformationDiv>
           <TextInformationDiv style={{ background: "red" }}>
-            {ckgamesscore[1]}
+            {oldGames.citiesAndKnights[1]}
           </TextInformationDiv>
           <TextInformationDiv style={{ background: "blue" }}>
-            {ckgamesscore[2]}
+            {oldGames.citiesAndKnights[2]}
           </TextInformationDiv>
           <TextInformationDiv style={{ background: "orange" }}>
-            {ckgamesscore[3]}
+            {oldGames.citiesAndKnights[3]}
           </TextInformationDiv>
         </TotalWinsDiv>
       </ScoreContainerDiv>
