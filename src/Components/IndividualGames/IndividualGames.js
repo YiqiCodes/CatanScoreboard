@@ -28,6 +28,7 @@ import {
   SubTitleText,
   BackButtonDiv,
   GoBackButton,
+  ScoreInput,
 } from "./IndividualGames.styles.js";
 
 import { Input, notification } from "antd";
@@ -41,14 +42,13 @@ const IndividualGames = () => {
   const [season, setSeason] = useState(2);
   const { games, fetchGames, createGame } = useGames();
   const { gamesTotal, fetchGamesTotal } = useGamesTotal();
+  const gameTracker = Object.keys(games.data);
 
   useEffect(() => {
     fetchGames();
     fetchGamesTotal();
     // eslint-disable-next-line
   }, []);
-
-  console.log("games", games);
 
   useEffect(() => {
     if (games.error) {
@@ -83,27 +83,19 @@ const IndividualGames = () => {
       2: scores[2],
       3: scores[3],
     };
-    console.log("body");
-
     createGame(body);
+    window.location.href = "/catan";
   };
 
   const renderInput = (index) => (
     <InputWrapper>
-      <Input
-        style={{
-          textAlign: "center",
-          width: "5rem",
-          color: "#252525",
-          background: "#eeeeee",
-          borderRadius: "6px",
-        }}
+      <ScoreInput
         value={scores[index]}
+        onChange={(event) => handleChange(event, index)}
+        onPressEnter={handleScoreSubmit}
         type="number"
         min="2"
         max="10"
-        onChange={(event) => handleChange(event, index)}
-        onPressEnter={handleScoreSubmit}
       />
     </InputWrapper>
   );
@@ -181,9 +173,12 @@ const IndividualGames = () => {
                   <div key={index}>{`${game.name}: ${game.score} `}</div>
                 ))}
               </IndividualGameContainer>
-              {Object.keys(games.data).map((groupKey) => (
+              {Object.keys(games.data).map((groupKey, index) => (
                 <div key={groupKey}>
                   <HexagonDiv>
+                    <div
+                      style={{ padding: "1rem" }}
+                    >{`Game ${gameTracker[index]}`}</div>
                     {games.data[groupKey].map((game, index) => (
                       <div key={index}>{`${game.name}: ${game.score} `}</div>
                     ))}
