@@ -29,9 +29,10 @@ import {
   BackButtonDiv,
   GoBackButton,
   ScoreInput,
+  ErrorText,
 } from "./IndividualGames.styles.js";
 
-import { Input, notification } from "antd";
+import { notification } from "antd";
 import { Link } from "react-router-dom";
 
 // Hooks
@@ -40,6 +41,7 @@ import { useGames, useGamesTotal } from "../../hooks/games/useGames";
 const IndividualGames = () => {
   const [scores, setScores] = useState([0, 0, 0, 0]);
   const [season, setSeason] = useState(2);
+  const [validScore, setValidScore] = useState(false);
   const { games, fetchGames, createGame } = useGames();
   const { gamesTotal, fetchGamesTotal } = useGamesTotal();
   const gameTracker = Object.keys(games.data);
@@ -83,8 +85,19 @@ const IndividualGames = () => {
       2: scores[2],
       3: scores[3],
     };
-    createGame(body);
-    window.location.href = "/catan";
+
+    //Check if score is appropriate
+    // eslint-disable-next-line
+    Object.values(body).map((score) => {
+      if (score > 2 || score <= 10) {
+        setValidScore(true);
+      }
+    });
+
+    if (validScore === true) {
+      createGame(body);
+      window.location.href = "/catan";
+    }
   };
 
   const renderInput = (index) => (
@@ -160,6 +173,9 @@ const IndividualGames = () => {
                 <NameScore>Mickias: {renderInput(1)}</NameScore>
                 <NameScore>Rob:{renderInput(2)}</NameScore>
                 <NameScore>Yiqi:{renderInput(3)}</NameScore>
+                {validScore ? (
+                  <ErrorText>Please enter scores between 2-10</ErrorText>
+                ) : null}
               </SaveField>
             ) : null}
           </ButtonContainer>

@@ -180,7 +180,7 @@ export const SaveField = styled.div`
 
 export const ErrorText = styled.div`
   text-align: center;
-  color: red;
+  color: salmon;
 `;
 
 export const ToggleSeasonButtonDiv = styled.div`
