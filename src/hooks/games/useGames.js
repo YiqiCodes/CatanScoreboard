@@ -31,7 +31,7 @@ const useGames = () => {
       .post("/api/games", body)
       .then((response) => {
         console.log(response.data);
-        // setData(response.data);
+        setData(response.data);
         setLoading(false);
         return response.data;
       })
