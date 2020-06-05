@@ -28,9 +28,11 @@ import {
   SubTitleText,
   BackButtonDiv,
   GoBackButton,
+  ScoreInput,
+  ErrorText,
 } from "./IndividualGames.styles.js";
 
-import { Input, notification } from "antd";
+import { notification } from "antd";
 import { Link } from "react-router-dom";
 
 // Hooks
@@ -39,16 +41,16 @@ import { useGames, useGamesTotal } from "../../hooks/games/useGames";
 const IndividualGames = () => {
   const [scores, setScores] = useState([0, 0, 0, 0]);
   const [season, setSeason] = useState(2);
+  const [validScore, setValidScore] = useState(false);
   const { games, fetchGames, createGame } = useGames();
   const { gamesTotal, fetchGamesTotal } = useGamesTotal();
+  const gameTracker = Object.keys(games.data);
 
   useEffect(() => {
     fetchGames();
     fetchGamesTotal();
     // eslint-disable-next-line
   }, []);
-
-  console.log("games", games);
 
   useEffect(() => {
     if (games.error) {
@@ -83,27 +85,30 @@ const IndividualGames = () => {
       2: scores[2],
       3: scores[3],
     };
-    console.log("body");
 
-    createGame(body);
+    //Check if score is appropriate
+    // eslint-disable-next-line
+    Object.values(body).map((score) => {
+      if (score > 2 || score <= 10) {
+        setValidScore(true);
+      }
+    });
+
+    if (validScore === true) {
+      createGame(body);
+      window.location.href = "/catan";
+    }
   };
 
   const renderInput = (index) => (
     <InputWrapper>
-      <Input
-        style={{
-          textAlign: "center",
-          width: "5rem",
-          color: "#252525",
-          background: "#eeeeee",
-          borderRadius: "6px",
-        }}
+      <ScoreInput
         value={scores[index]}
+        onChange={(event) => handleChange(event, index)}
+        onPressEnter={handleScoreSubmit}
         type="number"
         min="2"
         max="10"
-        onChange={(event) => handleChange(event, index)}
-        onPressEnter={handleScoreSubmit}
       />
     </InputWrapper>
   );
@@ -168,6 +173,9 @@ const IndividualGames = () => {
                 <NameScore>Mickias: {renderInput(1)}</NameScore>
                 <NameScore>Rob:{renderInput(2)}</NameScore>
                 <NameScore>Yiqi:{renderInput(3)}</NameScore>
+                {validScore ? (
+                  <ErrorText>Please enter scores between 2-10</ErrorText>
+                ) : null}
               </SaveField>
             ) : null}
           </ButtonContainer>
@@ -181,9 +189,12 @@ const IndividualGames = () => {
                   <div key={index}>{`${game.name}: ${game.score} `}</div>
                 ))}
               </IndividualGameContainer>
-              {Object.keys(games.data).map((groupKey) => (
+              {Object.keys(games.data).map((groupKey, index) => (
                 <div key={groupKey}>
                   <HexagonDiv>
+                    <div
+                      style={{ padding: "1rem" }}
+                    >{`Game ${gameTracker[index]}`}</div>
                     {games.data[groupKey].map((game, index) => (
                       <div key={index}>{`${game.name}: ${game.score} `}</div>
                     ))}

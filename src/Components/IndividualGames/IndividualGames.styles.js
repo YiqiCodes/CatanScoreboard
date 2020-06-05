@@ -117,7 +117,7 @@ export const HexagonDiv = styled.div`
   text-align: center;
   justify-content: center;
   align-items: center;
-  font-size: xx-large;
+  font-size: x-large;
   font-weight: 200;
   color: #eeeeee;
 
@@ -164,6 +164,14 @@ export const ButtonContainer = styled.div`
 
 export const InputWrapper = styled.div``;
 
+export const ScoreInput = styled.input`
+  text-align: center;
+  width: 5rem;
+  color: #252525;
+  background: #eeeeee;
+  border-radius: 6px;
+`;
+
 export const SaveField = styled.div`
   display: flex;
   flex-direction: column;
@@ -172,7 +180,7 @@ export const SaveField = styled.div`
 
 export const ErrorText = styled.div`
   text-align: center;
-  color: red;
+  color: salmon;
 `;
 
 export const ToggleSeasonButtonDiv = styled.div`
