@@ -48,6 +48,8 @@ const IndividualGames = () => {
     // eslint-disable-next-line
   }, []);
 
+  console.log("games", games);
+
   useEffect(() => {
     if (games.error) {
       notification.error({
@@ -76,11 +78,12 @@ const IndividualGames = () => {
 
   const handleScoreSubmit = () => {
     const body = {
-      1: scores[0],
-      2: scores[1],
-      3: scores[2],
-      4: scores[3],
+      0: scores[0],
+      1: scores[1],
+      2: scores[2],
+      3: scores[3],
     };
+    console.log("body");
 
     createGame(body);
   };
@@ -178,7 +181,6 @@ const IndividualGames = () => {
                   <div key={index}>{`${game.name}: ${game.score} `}</div>
                 ))}
               </IndividualGameContainer>
-
               {Object.keys(games.data).map((groupKey) => (
                 <div key={groupKey}>
                   <HexagonDiv>
