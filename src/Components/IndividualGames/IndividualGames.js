@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-
-import { Input } from "antd";
-
 import oldGames from "../../Pages/Helpers/OldData";
 
+// Assets
+import Dylan from "../../assets/Dylan.png";
+import Mickias from "../../assets/Mickias.png";
+import Rob from "../../assets/Rob.png";
+import Yiqi from "../../assets/Yiqi.png";
+
+// Components
 import {
   IndividualGamesContainer,
   IndividualGameContainer,
@@ -16,23 +19,43 @@ import {
   NameScore,
   HexagonDiv,
   SpacingDiv,
+  HeaderContainerDiv,
+  TitleDiv,
+  ScoreContainerDiv,
+  TextInformationDiv,
+  PlayerImage,
+  InformationColumn,
+  SubTitleText,
+  BackButtonDiv,
+  GoBackButton,
 } from "./IndividualGames.styles.js";
+
+import { Input, notification } from "antd";
+import { Link } from "react-router-dom";
+
+// Hooks
+import { useGames, useGamesTotal } from "../../hooks/games/useGames";
 
 const IndividualGames = () => {
   const [scores, setScores] = useState([0, 0, 0, 0]);
   const [season, setSeason] = useState(2);
-  const [seasonTwoScore, setSeasonTwoScore] = useState([]);
-  const totalScores = [];
-
-  // wrap into async await or do webhooks
+  const { games, fetchGames, createGame } = useGames();
+  const { gamesTotal, fetchGamesTotal } = useGamesTotal();
 
   useEffect(() => {
-    axios.get("/api/games/").then((response) => {
-      console.log("response", response.data);
-      setSeasonTwoScore(response.data);
-    });
+    fetchGames();
+    fetchGamesTotal();
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    if (games.error) {
+      notification.error({
+        message: "Error",
+        description: games.error,
+      });
+    }
+  }, [games.error]);
 
   const handleChange = (event, index) => {
     const newScores = [...scores];
@@ -51,38 +74,16 @@ const IndividualGames = () => {
     }
   };
 
-  const handleScoreSubmit = (e) => {
-    axios
-      .put("/api/users/update", { scores })
-      .then((response) => {
-        e.preventDefault();
-      })
-      .catch((error) => console.log(error));
+  const handleScoreSubmit = () => {
+    const body = {
+      1: scores[0],
+      2: scores[1],
+      3: scores[2],
+      4: scores[3],
+    };
+
+    createGame(body);
   };
-
-  const totalPointsCalculator = (seasonTwoScore) => {
-    let dylan = 0;
-    let mickias = 0;
-    let rob = 0;
-    let yiqi = 0;
-
-    // eslint-disable-next-line
-    seasonTwoScore.map((game) => {
-      dylan += game[0];
-      mickias += game[1];
-      rob += game[2];
-      yiqi += game[3];
-    });
-
-    totalScores.push(dylan);
-    totalScores.push(mickias);
-    totalScores.push(rob);
-    totalScores.push(yiqi);
-
-    return totalScores;
-  };
-
-  totalPointsCalculator(seasonTwoScore);
 
   const renderInput = (index) => (
     <InputWrapper>
@@ -104,78 +105,108 @@ const IndividualGames = () => {
     </InputWrapper>
   );
 
-  const uniqueGameIds = [
-    ...new Set(seasonTwoScore.map((game) => game.game_id)),
-  ];
-
   return (
-    <IndividualGamesContainer>
-      <>
-        <ButtonContainer>
-          <ToggleSeasonButton onClick={handleSeasonSubmit}>
-            Toggle Season
-          </ToggleSeasonButton>
+    <>
+      <HeaderContainerDiv>
+        <BackButtonDiv>
+          <Link to="/">
+            <GoBackButton> Back </GoBackButton>
+          </Link>
+        </BackButtonDiv>
+        <TitleDiv>Settlers of Catan</TitleDiv>
+        <ScoreContainerDiv>
+          <InformationColumn>
+            <SubTitleText>Settlers</SubTitleText>
+            <PlayerImage src={Dylan} alt="" />
+            <PlayerImage src={Mickias} alt="" />
+            <PlayerImage src={Rob} alt="" />
+            <PlayerImage src={Yiqi} alt="" />
+          </InformationColumn>
+          <InformationColumn>
+            <SubTitleText>Total Wins</SubTitleText>
+            {gamesTotal.data.map((game, index) => (
+              <TextInformationDiv>
+                {game.wins + oldGames.catanSeasonOne[index]}
+              </TextInformationDiv>
+            ))}
+          </InformationColumn>
+          <InformationColumn>
+            <SubTitleText>S2 Wins</SubTitleText>
+            {gamesTotal.data.map((game, index) => (
+              <TextInformationDiv key={index}>{game.wins}</TextInformationDiv>
+            ))}
+          </InformationColumn>
+          <InformationColumn>
+            <SubTitleText>S1 Wins</SubTitleText>
+            {oldGames.catanSeasonOne.map((game) => (
+              <TextInformationDiv>{game}</TextInformationDiv>
+            ))}
+          </InformationColumn>
+        </ScoreContainerDiv>
+      </HeaderContainerDiv>
+
+      <IndividualGamesContainer>
+        <>
+          <ButtonContainer>
+            <ToggleSeasonButton onClick={handleSeasonSubmit}>
+              Toggle Season
+            </ToggleSeasonButton>
+            {season === 2 ? (
+              <SaveField>
+                <ToggleSeasonButtonDiv>
+                  <ToggleSeasonButton
+                    onClick={handleScoreSubmit}
+                    style={{ background: "seagreen" }}
+                  >
+                    Save Score
+                  </ToggleSeasonButton>
+                </ToggleSeasonButtonDiv>
+                <NameScore>Dylan: {renderInput(0)}</NameScore>
+                <NameScore>Mickias: {renderInput(1)}</NameScore>
+                <NameScore>Rob:{renderInput(2)}</NameScore>
+                <NameScore>Yiqi:{renderInput(3)}</NameScore>
+              </SaveField>
+            ) : null}
+          </ButtonContainer>
           {season === 2 ? (
-            <SaveField>
-              <ToggleSeasonButtonDiv>
-                <ToggleSeasonButton
-                  onClick={handleScoreSubmit}
-                  style={{ background: "seagreen" }}
-                >
-                  Save Score
-                </ToggleSeasonButton>
-              </ToggleSeasonButtonDiv>
-              <NameScore>Dylan: {renderInput(0)}</NameScore>
-              <NameScore>Mickias: {renderInput(1)}</NameScore>
-              <NameScore>Rob:{renderInput(2)}</NameScore>
-              <NameScore>Yiqi:{renderInput(3)}</NameScore>
-            </SaveField>
-          ) : null}
-        </ButtonContainer>
-        {season === 2 ? (
-          <>
-            <IndividualGameContainer>
-              Total Points: <br></br>
-              <br></br>
-              Dylan: {totalScores[0]} <br></br>
-              Mickias: {totalScores[1]} <br></br>
-              Rob: {totalScores[2]} <br></br>
-              Yiqi: {totalScores[3]}
-            </IndividualGameContainer>
-            {uniqueGameIds.map((gameID) => {
-              const filteredGames = seasonTwoScore.filter(
-                (game) => game.game_id === gameID
-              );
-              return (
-                <>
+            <>
+              <IndividualGameContainer>
+                <NameScore style={{ justifyContent: "center" }}>
+                  Total Points:
+                </NameScore>
+                {gamesTotal.data.map((game, index) => (
+                  <div key={index}>{`${game.name}: ${game.score} `}</div>
+                ))}
+              </IndividualGameContainer>
+
+              {Object.keys(games.data).map((groupKey) => (
+                <div key={groupKey}>
                   <HexagonDiv>
-                    {filteredGames.map((filteredGame) => {
-                      return (
-                        <div>{`${filteredGame.name}: ${filteredGame.score} `}</div>
-                      );
-                    })}
+                    {games.data[groupKey].map((game, index) => (
+                      <div key={index}>{`${game.name}: ${game.score} `}</div>
+                    ))}
                   </HexagonDiv>
-                  <SpacingDiv></SpacingDiv>
-                </>
-              );
-            })}
-          </>
-        ) : (
-          <>
-            <h2>Season One</h2>
-            <div style={{ textAlign: "center" }}>
-              <div> **advanced analytics not available** </div>
-              <div> {`Yiqi: ${oldGames.catanSeasonOne[3]}`} </div>
-              <div> {`Mickias: ${oldGames.catanSeasonOne[1]}`} </div>
-              <div> {`Rob: ${oldGames.catanSeasonOne[2]}`} </div>
-              <div>{`Dylan: ${oldGames.catanSeasonOne[0]}`} </div>
-              <div> Gray: 1 </div>
-              <div> Jacqueline: 1 </div>
-            </div>
-          </>
-        )}
-      </>
-    </IndividualGamesContainer>
+                  <SpacingDiv />
+                </div>
+              ))}
+            </>
+          ) : (
+            <>
+              <h2>Season One</h2>
+              <div style={{ textAlign: "center" }}>
+                <div> **advanced analytics not available** </div>
+                <div> {`Yiqi: ${oldGames.catanSeasonOne[3]}`} </div>
+                <div> {`Mickias: ${oldGames.catanSeasonOne[1]}`} </div>
+                <div> {`Rob: ${oldGames.catanSeasonOne[2]}`} </div>
+                <div>{`Dylan: ${oldGames.catanSeasonOne[0]}`} </div>
+                <div> Gray: 1 </div>
+                <div> Jacqueline: 1 </div>
+              </div>
+            </>
+          )}
+        </>
+      </IndividualGamesContainer>
+    </>
   );
 };
 

@@ -81,7 +81,7 @@ export const ToggleSeasonButton = styled.button`
 `;
 
 export const TextInformationDiv = styled.div`
-  background: aqua;
+  background: black;
   height: 45px;
   width: 45px;
   border-radius: 50%;

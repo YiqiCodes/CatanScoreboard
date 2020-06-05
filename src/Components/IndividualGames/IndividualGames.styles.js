@@ -12,6 +12,7 @@ export const IndividualGamesContainer = styled.div`
 export const IndividualGameContainer = styled.div`
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
   border: 2px;
   border-radius: 12px;
@@ -23,6 +24,86 @@ export const IndividualGameContainer = styled.div`
   height: 10rem;
   background: #eeeeee;
   color: #252525;
+`;
+
+export const HeaderContainerDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 40%;
+  width: 100%;
+  background: #2d3842;
+  color: white;
+  position: fixed;
+  top: 0;
+`;
+
+export const InformationColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 20%;
+  text-align: center;
+  height: 90%;
+`;
+
+export const PlayerImage = styled.img`
+  width: 50px;
+  height: 50px;
+`;
+
+export const ScoreContainerDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 95%;
+  width: 100%;
+  text-align: center;
+`;
+
+export const SubTitleText = styled.div`
+  font-weight: 200;
+`;
+
+export const TextInformationDiv = styled.div`
+  background: black;
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 4px 0px;
+`;
+
+export const TitleDiv = styled.div`
+  justify-content: center;
+  display: flex;
+  text-align: center;
+  height: 5%;
+  padding: 5px;
+  width: 100%;
+  margin: 5px;
+  font-size: x-large;
+  font-weight: 200;
+`;
+
+export const BackButtonDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  left: 0;
+`;
+
+export const GoBackButton = styled.button`
+  width: 5rem;
+  height: 2rem;
+  background: lightslategrey;
+  margin: 5px;
+  color: white;
+  border-radius: 6px;
 `;
 
 export const HexagonDiv = styled.div`

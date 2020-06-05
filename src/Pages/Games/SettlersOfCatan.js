@@ -1,7 +1,6 @@
 import React from "react";
 
 // Components
-import HeaderBar from "../../Components/HeaderBar/HeaderBar";
 import IndividualGames from "../../Components/IndividualGames/IndividualGames";
 
 // Styles
@@ -11,7 +10,6 @@ const SettlersOfCatan = () => {
   return (
     <>
       <OutterGameContainerDiv style={{ justifyContent: "flex-end" }}>
-        <HeaderBar></HeaderBar>
         <ScrollableContainerDiv>
           <IndividualGames />
         </ScrollableContainerDiv>
