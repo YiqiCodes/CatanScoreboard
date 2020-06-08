@@ -79,6 +79,7 @@ const IndividualGames = () => {
   };
 
   const handleScoreSubmit = () => {
+    let scoreValidity = true;
     const body = {
       0: scores[0],
       1: scores[1],
@@ -89,13 +90,16 @@ const IndividualGames = () => {
     //Check if score is appropriate
     // eslint-disable-next-line
     Object.values(body).map((score) => {
-      if (score > 2 || score <= 10) {
+      if (score < 2 || score > 10) {
+        scoreValidity = false;
         setValidScore(true);
+        return;
       }
     });
 
     if (validScore === true) {
       createGame(body);
+      setValidScore(false);
       window.location.href = "/catan";
     }
   };
@@ -118,7 +122,7 @@ const IndividualGames = () => {
       <HeaderContainerDiv>
         <BackButtonDiv>
           <Link to="/">
-            <GoBackButton> Back </GoBackButton>
+            <GoBackButton> {"<"} </GoBackButton>
           </Link>
         </BackButtonDiv>
         <TitleDiv>Settlers of Catan</TitleDiv>
