@@ -93,11 +93,12 @@ const IndividualGames = () => {
       if (score < 2 || score > 10) {
         scoreValidity = false;
         setValidScore(true);
+        // eslint-disable-next-line
         return;
       }
     });
 
-    if (validScore === true) {
+    if (scoreValidity === true) {
       createGame(body);
       setValidScore(false);
       window.location.href = "/catan";
