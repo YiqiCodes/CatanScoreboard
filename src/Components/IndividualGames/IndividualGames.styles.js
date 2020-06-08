@@ -98,9 +98,9 @@ export const BackButtonDiv = styled.div`
 `;
 
 export const GoBackButton = styled.button`
-  width: 5rem;
+  width: 3.5rem;
   height: 2rem;
-  background: lightslategrey;
+  background: transparent;
   margin: 5px;
   color: white;
   border-radius: 6px;
