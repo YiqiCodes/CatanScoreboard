@@ -14,10 +14,3 @@
 [build.environment]
   REACT_APP_API_BASE_URL = "https://catanscoreboard.herokuapp.com/"
   REACT_APP_WEBSOCKET_URL = "wss://catanscoreboard.herokuapp.com/"
-
-[[redirects]]
-  from = "/catan"
-  to = "https://catanscoreboard.netlify.app/catan"
-  status = 200
-  force = true
-  headers = {X-From = "Netlify"}
