@@ -110,7 +110,7 @@ const IndividualGames = () => {
       <ScoreInput
         value={scores[index]}
         onChange={(event) => handleChange(event, index)}
-        onPressEnter={handleScoreSubmit}
+        // onPressEnter={(event) => handleScoreSubmit(event)}
         type="number"
         min="2"
         max="10"
@@ -138,7 +138,7 @@ const IndividualGames = () => {
           <InformationColumn>
             <SubTitleText>Total Wins</SubTitleText>
             {gamesTotal.data.map((game, index) => (
-              <TextInformationDiv>
+              <TextInformationDiv key={index}>
                 {game.wins + oldGames.catanSeasonOne[index]}
               </TextInformationDiv>
             ))}
@@ -151,8 +151,8 @@ const IndividualGames = () => {
           </InformationColumn>
           <InformationColumn>
             <SubTitleText>S1 Wins</SubTitleText>
-            {oldGames.catanSeasonOne.map((game) => (
-              <TextInformationDiv>{game}</TextInformationDiv>
+            {oldGames.catanSeasonOne.map((game, index) => (
+              <TextInformationDiv key={index}>{game}</TextInformationDiv>
             ))}
           </InformationColumn>
         </ScoreContainerDiv>
