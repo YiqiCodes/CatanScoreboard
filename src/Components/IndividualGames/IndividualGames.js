@@ -101,7 +101,7 @@ const IndividualGames = () => {
     if (scoreValidity === true) {
       createGame(body);
       setValidScore(false);
-      window.location.href = "/catan";
+      // window.location.href = "/catan";
     }
   };
 
