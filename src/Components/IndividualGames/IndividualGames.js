@@ -99,9 +99,10 @@ const IndividualGames = () => {
     });
 
     if (scoreValidity === true) {
+      console.log("valid");
       createGame(body);
       setValidScore(false);
-      // window.location.href = "/catan";
+      window.location.href = "/catan";
     }
   };
 
