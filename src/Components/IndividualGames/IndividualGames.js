@@ -107,7 +107,6 @@ const IndividualGames = () => {
     });
 
     if (scoreValidity === true && tenScore === true) {
-      console.log("valid");
       createGame(body);
       setValidScore(false);
       window.location.href = "/catan";

@@ -21,3 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Heroku
+# psql -h ec2-52-44-55-63.compute-1.amazonaws.com -p 5432 -U phiqncwaehretl -d d844s7125j1ktp
+
+# 14ea24f2801ca6ceefb7f4a6686e4b19cf7b16e3708c3d4a4f90b7a3fcaeb006
