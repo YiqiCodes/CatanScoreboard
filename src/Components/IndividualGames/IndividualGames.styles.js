@@ -146,6 +146,30 @@ export const SpacingDiv = styled.div`
   height: 25px;
   background: transparent;
 `;
+
+export const GameNumberTitle = styled.div`
+  padding: 1rem;
+`;
+
+export const GameHeader = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+export const DeleteGameButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  width: 2rem;
+  height: 2rem;
+  background: red;
+  color: white;
+  margin-right: 1rem;
+`;
+
 export const ToggleSeasonButton = styled.button`
   width: 8rem;
   height: 2.5rem;

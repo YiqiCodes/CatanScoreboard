@@ -26,7 +26,6 @@ const useGames = () => {
   const createGame = (body) => {
     setLoading(true);
     setError(null);
-
     return axios
       .post("/api/games", body)
       .then((response) => {

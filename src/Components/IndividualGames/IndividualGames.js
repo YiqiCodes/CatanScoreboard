@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import oldGames from "../../Pages/Helpers/OldData";
+import axios from "axios";
 
 // Assets
 import Dylan from "../../assets/Dylan.png";
@@ -30,6 +31,9 @@ import {
   GoBackButton,
   ScoreInput,
   ErrorText,
+  GameNumberTitle,
+  GameHeader,
+  DeleteGameButton,
 } from "./IndividualGames.styles.js";
 
 import { notification } from "antd";
@@ -44,7 +48,9 @@ const IndividualGames = () => {
   const [validScore, setValidScore] = useState(false);
   const { games, fetchGames, createGame } = useGames();
   const { gamesTotal, fetchGamesTotal } = useGamesTotal();
+  // eslint-disable-next-line
   const gameTracker = Object.keys(games.data);
+  let tenScore = false;
 
   useEffect(() => {
     fetchGames();
@@ -87,23 +93,39 @@ const IndividualGames = () => {
       3: scores[3],
     };
 
-    //Check if score is appropriate
+    // Check if score is appropriate
     // eslint-disable-next-line
     Object.values(body).map((score) => {
+      console.log(score);
       if (score < 2 || score > 10) {
         scoreValidity = false;
         setValidScore(true);
         // eslint-disable-next-line
         return;
       }
+      if (parseInt(score) === 10) tenScore = true;
     });
 
-    if (scoreValidity === true) {
+    if (scoreValidity === true && tenScore === true) {
       console.log("valid");
       createGame(body);
       setValidScore(false);
       window.location.href = "/catan";
+    } else {
+      setValidScore(true);
     }
+  };
+
+  const deleteGame = (id) => {
+    return axios
+      .delete("/api/games", { data: { identification: id } })
+      .then((response) => {
+        window.location.href = "/catan";
+        return response.data;
+      })
+      .catch((error) => {
+        console.log("ERROR");
+      });
   };
 
   const renderInput = (index) => (
@@ -198,9 +220,16 @@ const IndividualGames = () => {
               {Object.keys(games.data).map((groupKey, index) => (
                 <div key={groupKey}>
                   <HexagonDiv>
-                    <div
-                      style={{ padding: "1rem" }}
-                    >{`Game ${gameTracker[index]}`}</div>
+                    <GameHeader>
+                      <GameNumberTitle>{`Game ${gameTracker[index]}`}</GameNumberTitle>
+                      <DeleteGameButton
+                        onClick={() =>
+                          deleteGame(games.data[groupKey][index].game_id)
+                        }
+                      >
+                        X
+                      </DeleteGameButton>
+                    </GameHeader>
                     {games.data[groupKey].map((game, index) => (
                       <div key={index}>{`${game.name}: ${game.score} `}</div>
                     ))}
