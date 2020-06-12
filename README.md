@@ -1,6 +1,6 @@
 # Catan Scoreboard
 
-Built with React, antd, axios & styled-components
+Front-end Built with React, antd, axios & styled-components - see CatanBack for Backend repo.
 
 Deployed with Netlify:
 
